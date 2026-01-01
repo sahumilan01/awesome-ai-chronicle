@@ -1,0 +1,130 @@
+{
+  "sources": {
+    "primary_news": [
+      {
+        "name": "The Verge AI",
+        "url": "https://www.theverge.com/ai-artificial-intelligence",
+        "category": "news",
+        "frequency": "daily"
+      },
+      {
+        "name": "Ars Technica AI",
+        "url": "https://arstechnica.com/ai",
+        "category": "news",
+        "frequency": "daily"
+      },
+      {
+        "name": "TechCrunch AI",
+        "url": "https://techcrunch.com/category/artificial-intelligence",
+        "category": "news",
+        "frequency": "daily"
+      },
+      {
+        "name": "VentureBeat AI",
+        "url": "https://venturebeat.com/ai",
+        "category": "news",
+        "frequency": "daily"
+      },
+      {
+        "name": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/topic/artificial-intelligence",
+        "category": "news",
+        "frequency": "daily"
+      }
+    ],
+    "research_technical": [
+      {
+        "name": "arXiv AI",
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "category": "research",
+        "frequency": "daily"
+      },
+      {
+        "name": "arXiv Machine Learning",
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "category": "research",
+        "frequency": "daily"
+      },
+      {
+        "name": "Papers With Code",
+        "url": "https://paperswithcode.com",
+        "category": "research",
+        "frequency": "daily"
+      },
+      {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog",
+        "category": "technical",
+        "frequency": "weekly"
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://ai.googleblog.com",
+        "category": "technical",
+        "frequency": "weekly"
+      },
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog",
+        "category": "technical",
+        "frequency": "weekly"
+      },
+      {
+        "name": "Anthropic News",
+        "url": "https://www.anthropic.com/news",
+        "category": "technical",
+        "frequency": "weekly"
+      }
+    ],
+    "community_aggregators": [
+      {
+        "name": "Hacker News",
+        "url": "https://news.ycombinator.com",
+        "category": "community",
+        "frequency": "realtime"
+      },
+      {
+        "name": "Reddit MachineLearning",
+        "url": "https://www.reddit.com/r/MachineLearning",
+        "category": "community",
+        "frequency": "realtime"
+      },
+      {
+        "name": "Reddit LocalLLaMA",
+        "url": "https://www.reddit.com/r/LocalLLaMA",
+        "category": "community",
+        "frequency": "realtime"
+      },
+      {
+        "name": "AI News",
+        "url": "https://www.artificialintelligence-news.com",
+        "category": "aggregator",
+        "frequency": "daily"
+      }
+    ],
+    "newsletters": [
+      {
+        "name": "The Batch",
+        "url": "https://www.deeplearning.ai/the-batch",
+        "category": "newsletter",
+        "frequency": "weekly",
+        "author": "Andrew Ng"
+      },
+      {
+        "name": "Import AI",
+        "url": "https://importai.substack.com",
+        "category": "newsletter",
+        "frequency": "weekly",
+        "author": "Jack Clark"
+      },
+      {
+        "name": "The Algorithm",
+        "url": "https://www.technologyreview.com/topic/artificial-intelligence",
+        "category": "newsletter",
+        "frequency": "weekly",
+        "author": "MIT Tech Review"
+      }
+    ]
+  },
+  "last_updated": "2025-12-31"
+}
