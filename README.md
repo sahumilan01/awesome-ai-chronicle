@@ -5,6 +5,9 @@ A curated timeline of AI developments, breakthroughs, and industry updates.
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://sahumilan01.github.io/awesome-ai-chronicle/)
+
+**[View the Chronicle](https://sahumilan01.github.io/awesome-ai-chronicle/)**
 
 ---
 
