@@ -14,13 +14,13 @@ Monthly summary of top AI developments.
 
 ### 🔥 2025-02-27 — GPT-4.5 Research Preview Announced
 OpenAI announced a research preview of GPT-4.5, described as their largest and most advanced AI model to date, featuring improved reasoning and reduced hallucinations.
-- **Source:** [OpenAI Blog](https://openai.com/blog)
+- **Source:** [OpenAI Blog](https://openai.com/index/introducing-gpt-4-5/) | [CNBC](https://www.cnbc.com/2025/02/27/openai-launching-gpt-4point5-general-purpose-large-language-model.html)
 - **Tags:** `#openai` `#gpt` `#llm` `#release` `#research`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
 ### ⭐ 2025-02-10 — AI Action Summit Paris: €109B Investment Pledge
-The AI Action Summit in Paris concluded with announcements of €109 billion in private AI investments for France over the coming years, cementing Europe's AI ambitions.
-- **Source:** [French Government](https://www.gouvernement.fr/) | [Reuters](https://www.reuters.com/)
+The AI Action Summit in Paris (Feb 10-11) concluded with announcements of €109 billion in private AI investments for France, cementing Europe's AI ambitions.
+- **Source:** [French Government](https://www.diplomatie.gouv.fr/en/french-foreign-policy/digital-diplomacy/news/article/ai-action-summit-10-11-feb-2025) | [Wikipedia](https://en.wikipedia.org/wiki/AI_Action_Summit)
 - **Tags:** `#europe` `#france` `#funding` `#policy` `#summit`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 

@@ -12,19 +12,19 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-05-14 — Claude 4 Family Launch
+### 🔥 2025-05-22 — Claude 4 Family Launch
 Anthropic introduced the Claude 4 family (Opus 4 and Sonnet 4) with 200K token context and extended thinking mode. Opus 4 was positioned as "the best coding model in the world."
 - **Source:** [Anthropic Blog](https://www.anthropic.com/news)
 - **Tags:** `#anthropic` `#claude` `#llm` `#coding` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-05-20 — Google Veo 3, Imagen 4, and Flow
+### 🔥 2025-05-20 — Google Veo 3, Imagen 4, and Flow (I/O 2025)
 Google released Veo 3 (video), Imagen 4 (images), and Flow (motion) generative media models, marking a breakthrough in AI-generated content quality.
 - **Source:** [Google DeepMind](https://deepmind.google/)
 - **Tags:** `#google` `#video` `#image` `#generative` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### ⭐ 2025-05-14 — AlphaEvolve: Gemini-Powered Coding Agent
+### ⭐ 2025-05-20 — AlphaEvolve: Gemini-Powered Coding Agent
 Google DeepMind announced AlphaEvolve, a Gemini-powered coding agent for designing advanced algorithms, capable of autonomous code generation and optimization.
 - **Source:** [Google DeepMind](https://deepmind.google/)
 - **Tags:** `#google` `#agents` `#coding` `#research`

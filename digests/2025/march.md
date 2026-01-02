@@ -12,15 +12,15 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-03-12 — Gemini 2.5 Release
-Google released Gemini 2.5, advancing model capabilities with breakthroughs in reasoning, multimodal understanding, and efficiency. The model quickly topped several benchmarks.
-- **Source:** [Google Blog](https://blog.google/technology/ai/)
+### 🔥 2025-03-25 — Gemini 2.5 Release
+Google released Gemini 2.5 Pro Experimental, its most intelligent model with enhanced reasoning and "thinking" capabilities. The model debuted at #1 on LMArena.
+- **Source:** [Google DeepMind Blog](https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/)
 - **Tags:** `#google` `#gemini` `#llm` `#release` `#multimodal`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-03-20 — OpenAI $40B Funding at $300B Valuation
-OpenAI closed a $40 billion funding round, the largest ever by a private tech company, valuing the company at $300 billion. A secondary sale later valued it at $500B.
-- **Source:** [Wall Street Journal](https://www.wsj.com/) | [Bloomberg](https://www.bloomberg.com/)
+### 🔥 2025-03-31 — OpenAI $40B Funding at $300B Valuation
+OpenAI closed a $40 billion funding round led by SoftBank, the largest ever by a private tech company, valuing the company at $300 billion.
+- **Source:** [OpenAI Blog](https://openai.com/index/march-funding-updates/) | [CNBC](https://www.cnbc.com/2025/03/31/openai-closes-40-billion-in-funding-the-largest-private-fundraise-in-history-softbank-chatgpt.html)
 - **Tags:** `#openai` `#funding` `#valuation` `#industry`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 

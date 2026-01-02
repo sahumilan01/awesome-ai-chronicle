@@ -12,19 +12,19 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-07-20 — AI Wins IMO 2025 Gold Medals
+### 🔥 2025-07-19 — AI Wins IMO 2025 Gold Medals
 An experimental OpenAI model secured a gold medal at IMO 2025 without external tools. Google's Gemini Deep Think also earned gold by solving five of six problems with parallel reasoning.
 - **Source:** [IMO 2025](https://www.imo-official.org/) | [OpenAI](https://openai.com/) | [Google DeepMind](https://deepmind.google/)
 - **Tags:** `#openai` `#google` `#math` `#benchmark` `#breakthrough`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-07-15 — ChatGPT Agent Launch
+### 🔥 2025-07-17 — ChatGPT Agent Launch
 OpenAI launched ChatGPT Agent in July as a unified agentic system capable of using its own computer, navigating websites, running code, and creating documents autonomously.
 - **Source:** [OpenAI Blog](https://openai.com/blog)
 - **Tags:** `#openai` `#agents` `#chatgpt` `#product` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-07-08 — Grok 4 Launch
+### 🔥 2025-07-09 — Grok 4 Launch
 Elon Musk's xAI launched Grok 4 in July, claiming top positions on reasoning benchmarks and integrated deeply into X platform features.
 - **Source:** [xAI](https://x.ai/)
 - **Tags:** `#xai` `#grok` `#reasoning` `#release`
@@ -42,7 +42,7 @@ Google announced AlphaEarth Foundations to help map the planet in unprecedented 
 - **Tags:** `#google` `#earth` `#satellite` `#research`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### ⭐ 2025-07-20 — Gemini Deep Think Announcement
+### ⭐ 2025-07-19 — Gemini Deep Think Announcement
 Google introduced Gemini Deep Think with extended reasoning capabilities, earning IMO gold through parallel chain-of-thought processing.
 - **Source:** [Google DeepMind](https://deepmind.google/)
 - **Tags:** `#google` `#gemini` `#reasoning` `#release`

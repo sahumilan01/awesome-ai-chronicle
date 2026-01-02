@@ -12,7 +12,7 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-06-15 — Gemini 2.5 Pro Production Release
+### 🔥 2025-06-17 — Gemini 2.5 Pro Production Release
 Google released the final production-ready version of Gemini 2.5 Pro, which led benchmarks across reasoning, coding, and multimodal tasks.
 - **Source:** [Google AI Blog](https://ai.googleblog.com/)
 - **Tags:** `#google` `#gemini` `#llm` `#release` `#benchmark`

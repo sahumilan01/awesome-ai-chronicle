@@ -12,7 +12,7 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-12-10 — DeepSeek V3.2 Speciale IMO Gold
+### 🔥 2025-12-01 — DeepSeek V3.2 Release
 DeepSeek V3.2 Speciale achieved gold medal equivalent on IMO problems, marking a major milestone for Chinese AI reasoning capabilities.
 - **Source:** [DeepSeek](https://www.deepseek.com/) | [IMO](https://www.imo-official.org/)
 - **Tags:** `#deepseek` `#china` `#math` `#benchmark` `#breakthrough`
@@ -30,7 +30,7 @@ OpenAI launched GPT-5.2 Pro with enhanced professional capabilities, agentic fea
 - **Tags:** `#openai` `#gpt` `#pro` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-12-22 — Mistral 3 Multimodal Release
+### 🔥 2025-12-02 — Mistral 3 Multimodal Release
 Mistral AI released Mistral 3 with native multimodal capabilities, bringing European AI to the frontier.
 - **Source:** [Mistral AI](https://mistral.ai/)
 - **Tags:** `#mistral` `#europe` `#multimodal` `#release`

@@ -18,13 +18,13 @@ OpenAI announced o3 and o4-mini, next-generation reasoning models with native ag
 - **Tags:** `#openai` `#reasoning` `#agents` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-04-08 — Meta Llama 4 Family Release
+### 🔥 2025-04-05 — Meta Llama 4 Family Release
 Meta released Llama 4 as the first open-weight model family with mixture-of-experts architecture and native multimodality, featuring Scout, Maverick, and planned Behemoth variants.
 - **Source:** [Meta AI Blog](https://ai.meta.com/blog/)
 - **Tags:** `#meta` `#llama` `#open-source` `#moe` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### ⭐ 2025-04-08 — Llama 4 Scout: 10M Token Context
+### ⭐ 2025-04-05 — Llama 4 Scout: 10M Token Context
 Llama 4 Scout offered an unprecedented 10 million token context window while fitting on a single Nvidia H100 GPU with quantization—a new frontier in context length.
 - **Source:** [Meta AI Blog](https://ai.meta.com/blog/)
 - **Tags:** `#meta` `#llama` `#context` `#efficiency`

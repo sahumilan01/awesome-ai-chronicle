@@ -24,7 +24,7 @@ OpenAI released GPT-5.1 with significant improvements to reasoning, instruction 
 - **Tags:** `#openai` `#gpt` `#llm` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
-### 🔥 2025-11-25 — Claude Opus 4.5 Release
+### 🔥 2025-11-24 — Claude Opus 4.5 Release
 Anthropic released Claude Opus 4.5, described as the most advanced Claude model with improved reasoning and 256K context.
 - **Source:** [Anthropic Blog](https://www.anthropic.com/news)
 - **Tags:** `#anthropic` `#claude` `#llm` `#release`

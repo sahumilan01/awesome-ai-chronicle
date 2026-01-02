@@ -14,13 +14,13 @@ Monthly summary of top AI developments.
 
 ### 🔥 2025-01-20 — DeepSeek R1: China's "Sputnik Moment"
 DeepSeek released R1, an open-source reasoning model matching OpenAI o1 performance at a fraction of the training cost (~$6M vs $100M+), sending shockwaves through the industry.
-- **Source:** [DeepSeek Blog](https://www.deepseek.com/) | [Reuters](https://www.reuters.com/technology/artificial-intelligence/)
+- **Source:** [DeepSeek API Docs](https://api-docs.deepseek.com/news/news250120) | [Wikipedia](https://en.wikipedia.org/wiki/DeepSeek_(chatbot))
 - **Tags:** `#deepseek` `#llm` `#open-source` `#china` `#reasoning` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
 ### 🔥 2025-01-21 — Stargate Project: $500B AI Infrastructure Initiative
 OpenAI, SoftBank, Oracle, and MGX announced the Stargate Project, a $500 billion joint venture to build AI data centers and power facilities across the United States.
-- **Source:** [OpenAI Blog](https://openai.com/blog) | [White House](https://www.whitehouse.gov/)
+- **Source:** [OpenAI Blog](https://openai.com/index/announcing-the-stargate-project/) | [Wikipedia](https://en.wikipedia.org/wiki/Stargate_LLC)
 - **Tags:** `#openai` `#infrastructure` `#funding` `#policy` `#stargate`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 

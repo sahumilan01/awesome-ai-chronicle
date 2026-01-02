@@ -12,7 +12,7 @@ Monthly summary of top AI developments.
 
 ## Entries
 
-### 🔥 2025-09-15 — Anthropic $13B Funding Round
+### 🔥 2025-09-02 — Anthropic $13B Funding Round
 Anthropic closed its largest funding round ever at $13B, valuing the company at $183B, making it one of the most valuable private companies globally.
 - **Source:** [Bloomberg](https://www.bloomberg.com/) | [The Information](https://www.theinformation.com/)
 - **Tags:** `#anthropic` `#funding` `#valuation` `#milestone`

@@ -14,7 +14,7 @@ Monthly summary of top AI developments.
 
 ### 🔥 2025-08-07 — GPT-5 Release
 OpenAI released GPT-5, featuring unified multimodal processing, 400,000 token context window, and combined reasoning with conversational speed. Widely considered the most significant model release of the year.
-- **Source:** [OpenAI Blog](https://openai.com/blog)
+- **Source:** [OpenAI Blog](https://openai.com/index/introducing-gpt-5/) | [CNBC](https://www.cnbc.com/2025/08/07/openai-launches-gpt-5-model-for-all-chatgpt-users.html)
 - **Tags:** `#openai` `#gpt5` `#llm` `#multimodal` `#release`
 - **Contributed by:** [@sahumilan01](https://github.com/sahumilan01)
 
