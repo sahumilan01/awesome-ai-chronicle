@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome AI Chronicle — A Curated Timeline of AI Developments</title>
-  <meta name="description" content="A community-curated timeline tracking AI breakthroughs, tools, and industry shifts. From foundational research to cutting-edge developments.">
-  <meta property="og:title" content="Awesome AI Chronicle">
-  <meta property="og:description" content="The definitive record of AI's evolution — tracking breakthroughs, tools, and industry shifts.">
-  <meta property="og:type" content="website">
+  <title>Awesome AI Chronicle</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -147,56 +143,6 @@
     .divider-line {
       border: 0;
       border-top: 1px solid var(--rule);
-    }
-
-    /* Latest Digest Banner */
-    .digest-banner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .digest-card {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: var(--paper);
-      padding: 2rem 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .digest-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    }
-
-    .digest-badge {
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .digest-title {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      font-weight: 400;
-    }
-
-    .digest-arrow {
-      font-size: 1.5rem;
-      opacity: 0.5;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .digest-card:hover .digest-arrow {
-      opacity: 1;
-      transform: translateX(4px);
     }
 
     /* Categories */
@@ -386,28 +332,6 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .masthead-inner {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-      }
-
-      .digest-card {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .digest-arrow {
-        transform: rotate(90deg);
-      }
-
-      .digest-card:hover .digest-arrow {
-        transform: rotate(90deg) translateX(4px);
-      }
-    }
-
     /* Animations */
     @keyframes fadeUp {
       from {
@@ -439,7 +363,7 @@
 <body>
   <header class="masthead">
     <div class="masthead-inner">
-      <span class="masthead-date">January 2, 2026</span>
+      <span class="masthead-date">Est. 2024</span>
       <span class="masthead-title">The AI Chronicle</span>
       <a href="#explore" class="masthead-cta">Explore Archive &rarr;</a>
     </div>
@@ -450,17 +374,7 @@
     <h1 class="hero-title">The Definitive Record of AI's Evolution</h1>
     <p class="hero-subtitle">A curated timeline tracking breakthroughs, tools, and industry shifts in artificial intelligence—updated as history unfolds.</p>
     <div class="hero-rule"></div>
-    <p class="hero-meta">Tracking developments from <strong>2000 to 2026</strong> · Community-sourced · MIT Licensed</p>
-  </section>
-
-  <section class="digest-banner">
-    <a href="docs.html#/digests/2025/january" class="digest-card">
-      <div>
-        <span class="digest-badge">Latest Digest</span>
-        <h3 class="digest-title">January 2025 — Monthly AI Roundup</h3>
-      </div>
-      <span class="digest-arrow">&rarr;</span>
-    </a>
+    <p class="hero-meta">Tracking developments from <strong>2020 to Present</strong> · Community-sourced · MIT Licensed</p>
   </section>
 
   <div class="divider"><hr class="divider-line"></div>
@@ -471,22 +385,22 @@
       <h2 class="section-title">Four Pillars of Progress</h2>
     </div>
     <div class="category-grid">
-      <a href="docs.html#/categories/models-research" class="category-card">
+      <a href="categories/models-research.html" class="category-card">
         <div class="category-icon">&#9670;</div>
         <h3 class="category-name">Models & Research</h3>
         <p class="category-desc">New model releases, landmark papers, benchmark achievements, and architectural innovations.</p>
       </a>
-      <a href="docs.html#/categories/tools-frameworks" class="category-card">
+      <a href="categories/tools-frameworks.html" class="category-card">
         <div class="category-icon">&#9671;</div>
         <h3 class="category-name">Tools & Frameworks</h3>
         <p class="category-desc">Developer tools, libraries, infrastructure updates, and the building blocks of AI systems.</p>
       </a>
-      <a href="docs.html#/categories/products-applications" class="category-card">
+      <a href="categories/products-applications.html" class="category-card">
         <div class="category-icon">&#9672;</div>
         <h3 class="category-name">Products & Applications</h3>
         <p class="category-desc">Consumer apps, enterprise solutions, and real-world implementations of AI technology.</p>
       </a>
-      <a href="docs.html#/categories/industry-business" class="category-card">
+      <a href="categories/industry-business.html" class="category-card">
         <div class="category-icon">&#9673;</div>
         <h3 class="category-name">Industry & Business</h3>
         <p class="category-desc">Funding rounds, acquisitions, policy developments, and the business of artificial intelligence.</p>
@@ -530,14 +444,14 @@
     <h2 class="cta-title">Join the Chronicle</h2>
     <p class="cta-text">Help document AI history. Submit entries, suggest corrections, or star the repository.</p>
     <div class="cta-buttons">
-      <a href="docs.html" class="btn btn-primary">Read the Chronicle</a>
+      <a href="README.html" class="btn btn-primary">Read the Chronicle</a>
       <a href="https://github.com/sahumilan01/awesome-ai-chronicle" class="btn btn-secondary">View on GitHub</a>
     </div>
   </section>
 
   <footer class="footer">
     <p class="footer-text">
-      Built by the community, for the community. <a href="docs.html#/LICENSE">MIT License</a> · <a href="docs.html#/CONTRIBUTING">Contribute</a>
+      Built by the community, for the community. <a href="LICENSE.html">MIT License</a> · <a href="CONTRIBUTING.html">Contribute</a>
     </p>
   </footer>
 </body>

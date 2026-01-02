@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chronicle — Epoch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #faf9f6;
+      --ink: #1c1917;
+      --warm-gray: #78716c;
+      --terracotta: #c2410c;
+      --gold: #d97706;
+      --rule: #e7e5e4;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    .header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav a {
+      font-size: 0.875rem;
+      color: var(--warm-gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--cream) !important;
+      padding: 0.625rem 1.25rem;
+      border-radius: 100px;
+    }
+
+    .nav-cta:hover {
+      background: var(--terracotta);
+    }
+
+    /* Hero with Timeline */
+    .hero {
+      padding: 5rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--terracotta);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--warm-gray);
+      max-width: 550px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+    }
+
+    /* Timeline Visual */
+    .timeline-hero {
+      padding: 3rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .timeline-track {
+      display: flex;
+      gap: 0;
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rule) 10%, var(--rule) 90%, transparent);
+    }
+
+    .epoch-marker {
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      position: relative;
+      padding: 0 1rem;
+    }
+
+    .epoch-marker::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background: var(--cream);
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .epoch-marker.active::before {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      width: 16px;
+      height: 16px;
+    }
+
+    .epoch-year {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      transform: translateY(-2.5rem);
+    }
+
+    .epoch-label {
+      font-size: 0.75rem;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transform: translateY(2rem);
+    }
+
+    .epoch-marker.active .epoch-year {
+      color: var(--terracotta);
+    }
+
+    /* Categories as Cards */
+    .categories {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .section-link {
+      font-size: 0.875rem;
+      color: var(--terracotta);
+      text-decoration: none;
+    }
+
+    .section-link:hover {
+      text-decoration: underline;
+    }
+
+    .category-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .category-card {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--terracotta);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--ink);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -20px rgba(0,0,0,0.15);
+    }
+
+    .category-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-desc {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+
+    /* Significance */
+    .significance {
+      padding: 4rem 0;
+      background: var(--ink);
+      color: var(--cream);
+      margin: 0 -100vw;
+      padding-left: 100vw;
+      padding-right: 100vw;
+    }
+
+    .sig-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sig-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .sig-grid {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .sig-item {
+      text-align: center;
+    }
+
+    .sig-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .sig-name {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .sig-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .cta-text {
+      color: var(--warm-gray);
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .btn-primary:hover {
+      background: var(--terracotta);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--ink);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+    }
+
+    .footer-text a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .category-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-track {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .epoch-marker {
+        min-width: 120px;
+      }
+
+      .nav {
+        gap: 1rem;
+      }
+
+      .sig-grid {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">AI Chronicle</div>
+        <nav class="nav">
+          <a href="#categories">Categories</a>
+          <a href="digests/2025/README.html">2025 Digest</a>
+          <a href="README.html" class="nav-cta">Explore</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label">A Living Timeline</p>
+      <h1 class="hero-title">Documenting Every<br>AI Epoch</h1>
+      <p class="hero-subtitle">Track the evolution of artificial intelligence—from foundational breakthroughs to today's cutting-edge developments.</p>
+    </div>
+  </section>
+
+  <section class="timeline-hero">
+    <div class="container">
+      <div class="timeline-track">
+        <div class="epoch-marker">
+          <span class="epoch-year">2000</span>
+          <span class="epoch-label">Early ML</span>
+        </div>
+        <div class="epoch-marker">
+          <span class="epoch-year">2012</span>
+          <span class="epoch-label">Deep Learning</span>
+        </div>
+        <div class="epoch-marker">
+          <span class="epoch-year">2017</span>
+          <span class="epoch-label">Transformers</span>
+        </div>
+        <div class="epoch-marker">
+          <span class="epoch-year">2022</span>
+          <span class="epoch-label">ChatGPT Era</span>
+        </div>
+        <div class="epoch-marker active">
+          <span class="epoch-year">2025</span>
+          <span class="epoch-label">Now</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse by Category</h2>
+        <a href="README.html" class="section-link">View all entries &rarr;</a>
+      </div>
+      <div class="category-cards">
+        <a href="categories/models-research.html" class="category-card">
+          <div class="category-icon">&#9679;</div>
+          <h3 class="category-name">Models & Research</h3>
+          <p class="category-desc">New model releases, landmark papers, benchmarks, and architectural innovations shaping the field.</p>
+        </a>
+        <a href="categories/tools-frameworks.html" class="category-card">
+          <div class="category-icon">&#9670;</div>
+          <h3 class="category-name">Tools & Frameworks</h3>
+          <p class="category-desc">Developer tools, libraries, and infrastructure updates powering AI development.</p>
+        </a>
+        <a href="categories/products-applications.html" class="category-card">
+          <div class="category-icon">&#9671;</div>
+          <h3 class="category-name">Products & Applications</h3>
+          <p class="category-desc">Consumer apps, enterprise solutions, and real-world AI implementations.</p>
+        </a>
+        <a href="categories/industry-business.html" class="category-card">
+          <div class="category-icon">&#9672;</div>
+          <h3 class="category-name">Industry & Business</h3>
+          <p class="category-desc">Funding rounds, acquisitions, policy developments, and market dynamics.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="significance">
+    <div class="sig-inner">
+      <h2 class="sig-title">Entry Classification</h2>
+      <div class="sig-grid">
+        <div class="sig-item">
+          <div class="sig-icon">&#128293;</div>
+          <div class="sig-name">Breakthrough</div>
+          <p class="sig-desc">Industry-changing</p>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">&#11088;</div>
+          <div class="sig-name">Notable</div>
+          <p class="sig-desc">Worth knowing</p>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">&bull;</div>
+          <div class="sig-name">Regular</div>
+          <p class="sig-desc">Minor updates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta-title">Contribute to History</h2>
+      <p class="cta-text">Help document AI's evolution. Submit entries, suggest corrections, or improve the archive.</p>
+      <div class="cta-buttons">
+        <a href="README.html" class="btn btn-primary">Read the Chronicle</a>
+        <a href="https://github.com/sahumilan01/awesome-ai-chronicle" class="btn btn-secondary">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">
+        <a href="https://github.com/sahumilan01/awesome-ai-chronicle">Open Source</a> ·
+        <a href="LICENSE.html">MIT License</a> ·
+        Built by the community
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chronicle — Signal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gray-100: #f5f5f5;
+      --gray-300: #d4d4d4;
+      --gray-500: #737373;
+      --gray-700: #404040;
+      --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Utility */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+
+    /* Header */
+    .header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav a {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav a:hover {
+      color: var(--black);
+    }
+
+    /* Hero */
+    .hero {
+      padding: clamp(4rem, 12vw, 10rem) 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-right {
+      padding-bottom: 0.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1.125rem;
+      color: var(--gray-700);
+      max-width: 400px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--black);
+      transition: gap 0.2s;
+    }
+
+    .hero-link:hover {
+      gap: 0.75rem;
+    }
+
+    /* Categories */
+    .categories {
+      border-bottom: 1px solid var(--black);
+    }
+
+    .category-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 200px;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--gray-300);
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .category-row:last-child {
+      border-bottom: none;
+    }
+
+    .category-row:hover {
+      background: var(--gray-100);
+      margin: 0 -2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .category-num {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    .category-name {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .category-count {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      text-align: right;
+    }
+
+    /* Info Section */
+    .info {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .info-block h3 {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+      margin-bottom: 1rem;
+    }
+
+    .info-block p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Significance */
+    .significance {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .sig-header {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+      margin-bottom: 2rem;
+    }
+
+    .sig-row {
+      display: grid;
+      grid-template-columns: 60px 150px 1fr;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--gray-300);
+      align-items: center;
+    }
+
+    .sig-icon {
+      font-size: 1.25rem;
+    }
+
+    .sig-name {
+      font-weight: 500;
+    }
+
+    .sig-desc {
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 6rem 0;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .cta-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .cta-text {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      max-width: 600px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.15s;
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .btn-white:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--gray-500);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--gray-300);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--black);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .category-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .category-count {
+        text-align: left;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .sig-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .cta-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">AI Chronicle</div>
+        <nav class="nav">
+          <a href="#categories">Categories</a>
+          <a href="CONTRIBUTING.html">Contribute</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <h1 class="hero-title">The<br>AI<br>Signal</h1>
+        <div class="hero-right">
+          <p class="hero-desc">
+            A curated timeline of artificial intelligence developments—tracking breakthroughs, tools, and industry shifts as they happen.
+          </p>
+          <a href="README.html" class="hero-link">
+            Start reading <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories">
+    <div class="container">
+      <a href="categories/models-research.html" class="category-row">
+        <span class="category-num">01</span>
+        <span class="category-name">Models & Research</span>
+        <span class="category-count">Papers, benchmarks, architectures</span>
+      </a>
+      <a href="categories/tools-frameworks.html" class="category-row">
+        <span class="category-num">02</span>
+        <span class="category-name">Tools & Frameworks</span>
+        <span class="category-count">Libraries, infrastructure</span>
+      </a>
+      <a href="categories/products-applications.html" class="category-row">
+        <span class="category-num">03</span>
+        <span class="category-name">Products & Applications</span>
+        <span class="category-count">Consumer, enterprise</span>
+      </a>
+      <a href="categories/industry-business.html" class="category-row">
+        <span class="category-num">04</span>
+        <span class="category-name">Industry & Business</span>
+        <span class="category-count">Funding, policy, regulations</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-block">
+          <h3>About</h3>
+          <p>The AI landscape evolves rapidly. What was cutting-edge last month may be outdated today. This chronicle serves as a living record.</p>
+        </div>
+        <div class="info-block">
+          <h3>Sources</h3>
+          <p>Sourced from Twitter/X, official announcements, research papers, and community contributions. Verified before inclusion.</p>
+        </div>
+        <div class="info-block">
+          <h3>Coverage</h3>
+          <p>Detailed tracking from 2023–present. Key milestones from 2020–2022. Major events from 2000–2019.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="significance">
+    <div class="container">
+      <h2 class="sig-header">Significance Levels</h2>
+      <div class="sig-row">
+        <span class="sig-icon">&#128293;</span>
+        <span class="sig-name">Breakthrough</span>
+        <span class="sig-desc">Industry-changing developments</span>
+      </div>
+      <div class="sig-row">
+        <span class="sig-icon">&#11088;</span>
+        <span class="sig-name">Notable</span>
+        <span class="sig-desc">Significant updates worth knowing</span>
+      </div>
+      <div class="sig-row">
+        <span class="sig-icon">&bull;</span>
+        <span class="sig-name">Regular</span>
+        <span class="sig-desc">Minor news and updates</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-inner">
+        <p class="cta-text">Help document the history of artificial intelligence.</p>
+        <div class="cta-buttons">
+          <a href="README.html" class="btn btn-white">Read Chronicle</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle" class="btn btn-outline">View Source</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-text">&copy; 2024 AI Chronicle. MIT License.</span>
+        <div class="footer-links">
+          <a href="CONTRIBUTING.html">Contribute</a>
+          <a href="LICENSE.html">License</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chronicle — Cipher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0c0a09;
+      --bg-surface: #1c1917;
+      --bg-elevated: #292524;
+      --text: #fafaf9;
+      --text-muted: #a8a29e;
+      --text-dim: #78716c;
+      --amber: #f59e0b;
+      --amber-dim: rgba(245, 158, 11, 0.15);
+      --gold: #d97706;
+      --border: #292524;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Outfit', -apple-system, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    .header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(12, 10, 9, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .logo span {
+      color: var(--amber);
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 400;
+    }
+
+    .nav a:hover {
+      color: var(--amber);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 8rem 0 6rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--amber-dim) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: var(--amber);
+      color: var(--bg-deep);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px -10px var(--amber);
+    }
+
+    /* Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 3rem 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-icon {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    /* Categories */
+    .categories {
+      padding: 2rem 0 4rem;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .category-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .category-card:hover {
+      background: var(--bg-elevated);
+      border-color: var(--amber);
+      transform: translateY(-2px);
+    }
+
+    .category-card:hover .category-arrow {
+      color: var(--amber);
+      transform: translateX(4px);
+    }
+
+    .category-num {
+      font-family: var(--serif);
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .category-name {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .category-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-arrow {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      transition: all 0.2s;
+    }
+
+    /* Significance */
+    .significance {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sig-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .sig-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    .sig-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .sig-grid {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+    }
+
+    .sig-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .sig-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .sig-name {
+      font-family: var(--serif);
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .sig-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* About */
+    .about {
+      padding: 5rem 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--amber);
+    }
+
+    .about-content h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .about-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--amber);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: gap 0.2s;
+    }
+
+    .about-link:hover {
+      gap: 0.75rem;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.125rem;
+    }
+
+    .footer-logo span {
+      color: var(--amber);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--amber);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .sig-grid {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge { animation: fadeIn 0.6s ease 0.1s both; }
+    .hero-title { animation: fadeIn 0.6s ease 0.2s both; }
+    .hero-subtitle { animation: fadeIn 0.6s ease 0.3s both; }
+    .hero-cta { animation: fadeIn 0.6s ease 0.4s both; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">AI <span>Chronicle</span></div>
+        <nav class="nav">
+          <a href="#categories">Categories</a>
+          <a href="CONTRIBUTING.html">Contribute</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Community-Curated Archive
+        </div>
+        <h1 class="hero-title">The <em>Definitive</em><br>AI Record</h1>
+        <p class="hero-subtitle">A meticulously curated timeline of artificial intelligence developments—tracking breakthroughs, innovations, and industry evolution.</p>
+        <a href="README.html" class="hero-cta">
+          Enter the Archive
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-icon">&#9830;</span>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <section class="categories" id="categories">
+    <div class="container">
+      <div class="category-grid">
+        <a href="categories/models-research.html" class="category-card">
+          <div class="category-num">I</div>
+          <h3 class="category-name">Models & Research</h3>
+          <p class="category-desc">New model releases, landmark papers, benchmarks, and architectural innovations.</p>
+          <span class="category-arrow">&rarr;</span>
+        </a>
+        <a href="categories/tools-frameworks.html" class="category-card">
+          <div class="category-num">II</div>
+          <h3 class="category-name">Tools & Frameworks</h3>
+          <p class="category-desc">Developer tools, libraries, infrastructure, and the building blocks of AI systems.</p>
+          <span class="category-arrow">&rarr;</span>
+        </a>
+        <a href="categories/products-applications.html" class="category-card">
+          <div class="category-num">III</div>
+          <h3 class="category-name">Products & Applications</h3>
+          <p class="category-desc">Consumer apps, enterprise solutions, and real-world AI implementations.</p>
+          <span class="category-arrow">&rarr;</span>
+        </a>
+        <a href="categories/industry-business.html" class="category-card">
+          <div class="category-num">IV</div>
+          <h3 class="category-name">Industry & Business</h3>
+          <p class="category-desc">Funding rounds, acquisitions, policy developments, and market dynamics.</p>
+          <span class="category-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="significance">
+    <div class="container">
+      <div class="sig-header">
+        <p class="sig-label">Entry Classification</p>
+        <h2 class="sig-title">Significance Levels</h2>
+      </div>
+      <div class="sig-grid">
+        <div class="sig-item">
+          <div class="sig-icon">&#128293;</div>
+          <div class="sig-name">Breakthrough</div>
+          <p class="sig-desc">Industry-changing developments</p>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">&#11088;</div>
+          <div class="sig-name">Notable</div>
+          <p class="sig-desc">Significant updates worth knowing</p>
+        </div>
+        <div class="sig-item">
+          <div class="sig-icon">&bull;</div>
+          <div class="sig-name">Regular</div>
+          <p class="sig-desc">Minor news and updates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <p class="about-label">About the Chronicle</p>
+        <div class="about-content">
+          <h2>Why This Archive Exists</h2>
+          <p>The AI landscape evolves at unprecedented speed. What was cutting-edge last month may be outdated today. This chronicle serves as a living record—sourced from Twitter/X, official announcements, and community contributions.</p>
+          <p>AI knowledge has a short half-life. A structured timeline helps track what actually matters amid the noise.</p>
+          <a href="CONTRIBUTING.html" class="about-link">
+            Contribute to the archive <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">AI <span>Chronicle</span></div>
+        <div class="footer-links">
+          <a href="LICENSE.html">MIT License</a>
+          <a href="CONTRIBUTING.html">Contribute</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

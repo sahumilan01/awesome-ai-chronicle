@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chronicle — Landing Page Designs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --border: #27272a;
+      --text: #fafafa;
+      --muted: #a1a1aa;
+      --accent: #8b5cf6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .header-badge {
+      display: inline-block;
+      padding: 0.375rem 0.875rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .designs {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .design-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .design-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -20px rgba(139, 92, 246, 0.3);
+    }
+
+    .design-preview {
+      aspect-ratio: 16/10;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .design-preview iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+    }
+
+    .design-info {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .design-number {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .design-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .design-style {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .design-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .design-features li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.375rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .design-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .design-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: all 0.2s;
+      align-self: flex-start;
+    }
+
+    .design-link:hover {
+      filter: brightness(1.1);
+      gap: 0.75rem;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .design-card {
+        grid-template-columns: 1fr;
+      }
+
+      .design-preview {
+        aspect-ratio: 16/9;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="header-badge">5 Design Variations</span>
+      <h1>AI Chronicle Landing Pages</h1>
+      <p>Choose from 5 complementary design styles, all inspired by Medium's clean editorial aesthetic.</p>
+    </header>
+
+    <div class="designs">
+      <div class="design-card">
+        <div class="design-preview">
+          <iframe src="01-chronicle.html" loading="lazy"></iframe>
+        </div>
+        <div class="design-info">
+          <span class="design-number">Design 01</span>
+          <h2 class="design-name">Chronicle</h2>
+          <p class="design-style">Classic Editorial · Serif Typography</p>
+          <ul class="design-features">
+            <li>Elegant Libre Baskerville headings</li>
+            <li>Newspaper-inspired masthead</li>
+            <li>Warm cream and ink palette</li>
+            <li>Refined hover interactions</li>
+          </ul>
+          <a href="01-chronicle.html" class="design-link">
+            View Design <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="design-preview">
+          <iframe src="02-pulse.html" loading="lazy"></iframe>
+        </div>
+        <div class="design-info">
+          <span class="design-number">Design 02</span>
+          <h2 class="design-name">Pulse</h2>
+          <p class="design-style">Tech Terminal · Monospace</p>
+          <ul class="design-features">
+            <li>JetBrains Mono typography</li>
+            <li>Scanline overlay effect</li>
+            <li>Cyan accent on dark background</li>
+            <li>Live pulse animation</li>
+          </ul>
+          <a href="02-pulse.html" class="design-link">
+            View Design <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="design-preview">
+          <iframe src="03-signal.html" loading="lazy"></iframe>
+        </div>
+        <div class="design-info">
+          <span class="design-number">Design 03</span>
+          <h2 class="design-name">Signal</h2>
+          <p class="design-style">Swiss Minimalism · High Contrast</p>
+          <ul class="design-features">
+            <li>DM Sans clean typography</li>
+            <li>Bold black & white palette</li>
+            <li>Grid-based layout</li>
+            <li>Ultra-minimal interface</li>
+          </ul>
+          <a href="03-signal.html" class="design-link">
+            View Design <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="design-preview">
+          <iframe src="04-epoch.html" loading="lazy"></iframe>
+        </div>
+        <div class="design-info">
+          <span class="design-number">Design 04</span>
+          <h2 class="design-name">Epoch</h2>
+          <p class="design-style">Timeline Hero · Warm Tones</p>
+          <ul class="design-features">
+            <li>Fraunces display serif</li>
+            <li>Horizontal timeline visualization</li>
+            <li>Terracotta accent color</li>
+            <li>Card-based categories</li>
+          </ul>
+          <a href="04-epoch.html" class="design-link">
+            View Design <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="design-card">
+        <div class="design-preview">
+          <iframe src="05-cipher.html" loading="lazy"></iframe>
+        </div>
+        <div class="design-info">
+          <span class="design-number">Design 05</span>
+          <h2 class="design-name">Cipher</h2>
+          <p class="design-style">Dark Refined · Amber Accents</p>
+          <ul class="design-features">
+            <li>Cormorant Garamond elegance</li>
+            <li>Dark theme with grain texture</li>
+            <li>Gold/amber accent system</li>
+            <li>Sophisticated animations</li>
+          </ul>
+          <a href="05-cipher.html" class="design-link">
+            View Design <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>
+        Part of <a href="../README.html">Awesome AI Chronicle</a> ·
+        <a href="https://github.com/sahumilan01/awesome-ai-chronicle">GitHub</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
