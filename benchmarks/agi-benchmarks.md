@@ -7,22 +7,131 @@ Benchmarks designed to measure progress toward Artificial General Intelligence (
 ## Reasoning & Abstraction
 
 ### ARC-AGI (Abstraction and Reasoning Corpus)
-The gold standard for measuring fluid intelligence and novel problem-solving in AI systems.
+The gold standard for measuring fluid intelligence and novel problem-solving in AI systems. Created by François Chollet (creator of Keras, used by 2.5M+ developers), ARC-AGI has become the benchmark reported by all 4 major AI labs—OpenAI, Anthropic, Google DeepMind, and xAI—on their model cards.
+
+> *"ARC-AGI is about measuring the ability to efficiently acquire new skills outside of your training data."* — François Chollet
+
+#### The Philosophy
+
+In his seminal 2019 paper "On the Measure of Intelligence," Chollet argued that true intelligence isn't about how much you know, but how efficiently you can adapt to genuinely novel situations. ARC-AGI embodies this by testing:
+
+- **Fluid intelligence** — Reasoning about never-before-seen problems
+- **Core Knowledge priors** — Basic concepts like objects, counting, symmetry, containment
+- **Generalization** — Solving with just 2-3 examples (no massive training sets)
+
+Each puzzle shows input-output grid pairs, and the AI must infer the transformation rule and apply it to a new input. Crucially, every task is unique—no memorization possible.
+
+---
+
+#### ARC-AGI-1 (Original, 2019)
 
 | Metric | Details |
 |--------|---------|
-| **Creator** | Fran\u00e7ois Chollet (2019) |
-| **What it tests** | Fluid intelligence, abstraction, generalization to novel tasks |
-| **Format** | Visual grid puzzles requiring pattern recognition and transformation |
-| **Human baseline** | ~85% (average), 100% (with effort) |
-| **Current SOTA** | ~55% (as of late 2024) |
-| **Prize** | $1M ARC Prize for human-level performance |
+| **Tasks** | 1,000 unique visual puzzles |
+| **Format** | Colored grids (1-30 cells per side) |
+| **Human baseline** | ~85% average, 100% with effort |
+| **Prize** | $1M ARC Prize (ongoing) |
 
-**Why it matters:** Unlike benchmarks that can be memorized, ARC tests genuine reasoning on problems the model has never seen. Each puzzle requires understanding abstract rules and applying them to new situations.
+**The o3 Breakthrough (December 2024)**
+
+OpenAI's o3 model achieved a watershed moment:
+
+| Configuration | Score | Cost/Task | What It Means |
+|---------------|-------|-----------|---------------|
+| High-compute | 87.5% | $4,560 | First to approach human-level |
+| Low-compute | 75.7% | $26 | Qualifies for leaderboard |
+
+For context: GPT-3 scored 0% in 2020. GPT-4o scored ~5% in 2024. Then o3 hit 75-87% in late 2024.
+
+**How o3 Works (Chollet's Analysis)**
+
+Chollet theorizes o3 uses "deep learning-guided program search"—generating and executing natural language programs via chain-of-thought, similar to AlphaZero-style Monte Carlo tree search but in language space. Unlike earlier LLMs that "memorize, fetch, and apply," o3 synthesizes novel solutions at test time.
+
+**Important Caveats:**
+- o3 still fails on *very easy* tasks humans solve instantly
+- Trained on 75% of the public training set (unclear how much is genuine generalization)
+- Costs ~$27/task vs. ~$5 for human solvers
+- "Passing ARC-AGI does NOT equal achieving AGI" — Chollet
+
+---
+
+#### ARC-AGI-2 (2025)
+
+Designed to reset the benchmark after o3's breakthrough. Principle: **"Easy for humans, hard for AI."**
+
+| Metric | Details |
+|--------|---------|
+| **Tasks** | 120 per evaluation set (expanded from 100) |
+| **Design process** | 400+ human participants verified all tasks solvable |
+| **Human baseline** | 100% (experts), 60% (average participant) |
+| **Cost benchmark** | ~$17/task for human solvers |
+
+**Brutal Results for AI:**
+
+| Model | ARC-AGI-1 Score | ARC-AGI-2 Score |
+|-------|-----------------|-----------------|
+| o3-preview-low | 75.7% | **4%** |
+| o1-pro | ~50% | **~1%** |
+| Pure LLMs | 5% | **0%** |
+
+**Why It's So Much Harder:**
+
+1. **Symbolic Interpretation** — Symbols must be understood as having meaning beyond visual patterns
+2. **Compositional Reasoning** — Multiple interacting rules must apply simultaneously
+3. **Contextual Rule Application** — AI fixates on superficial patterns rather than underlying principles
+
+Removed all tasks from the original Kaggle contest to prevent overfitting. Added cost-per-task metrics—true intelligence requires efficiency, not just capability.
+
+---
+
+#### ARC-AGI-3 (Coming 2026)
+
+A radical departure: **Interactive Reasoning Benchmarks (IRBs)** using game environments.
+
+| Metric | Details |
+|--------|---------|
+| **Format** | Hand-crafted game environments, not static puzzles |
+| **Scope** | ~100 unique environments at full launch |
+| **Timeline** | Preview with 6 games (Aug 2025), full launch 2026 |
+| **Partner** | HuggingFace hosting evaluation competition |
+
+**What's Being Tested:**
+
+| Dimension | Description |
+|-----------|-------------|
+| Exploration | Discovering how environments work |
+| Perception-Planning-Action | Decision-making sequences |
+| Memory | Using past experience effectively |
+| Goal Acquisition | Understanding objectives without instructions |
+| Alignment | Acting according to inferred goals |
+
+**Design Constraints:**
+- Learnable within 1 minute by humans
+- No explicit instructions provided
+- No language or cultural references
+- Hidden state mechanics and long-term planning required
+
+This moves beyond "solve a puzzle" to "learn to play a game you've never seen"—much closer to real-world adaptability.
+
+---
+
+#### ARC Prize Competition
+
+| Year | Participants | Prize Pool | Top Score |
+|------|--------------|------------|-----------|
+| 2024 | 1,000+ teams | $1,125,000 | Various |
+| 2025 | 1,454 teams | $125,000+ | 54% (Poetiq, Gemini-based) |
+
+**2025 Leaderboard Highlights:**
+- Top verified model: Claude Opus 4.5 (Thinking, 64k) — 37.6% @ $2.20/task
+- Top refinement solution: Poetiq (Gemini 3 Pro) — 54% @ $30/task
+
+The ARC Prize Foundation (founded by François Chollet and Mike Knoop) offers $1M grand prize for human-level performance.
 
 - **Website:** [arcprize.org](https://arcprize.org/)
 - **Paper:** [On the Measure of Intelligence](https://arxiv.org/abs/1911.01547)
-- **Tags:** `#reasoning` `#abstraction` `#fluid-intelligence` `#chollet`
+- **Technical Report:** [ARC Prize 2024](https://arxiv.org/abs/2412.04604)
+- **Tags:** `#reasoning` `#abstraction` `#fluid-intelligence` `#chollet` `#agi-benchmark`
 
 ---
 
@@ -348,10 +457,12 @@ Tests for deceptive, manipulative, or misaligned behavior in agents.
 | HumanEval | 2024 | 3 years | ~95% |
 | MMLU | 2024 | 4 years | ~90% |
 | MATH | 2024 | 3 years | ~95% |
+| ARC-AGI-1 | 2024 | 5 years | 87.5% (o3) |
 | GPQA | Not yet | — | ~60% |
-| ARC-AGI | Not yet | — | ~55% |
+| ARC-AGI-2 | Not yet | — | 4% (o3) |
 | FrontierMath | Not yet | — | <5% |
 | SWE-bench | Not yet | — | ~50% |
+| ARC-AGI-3 | Coming 2026 | — | TBD |
 
 ---
 
