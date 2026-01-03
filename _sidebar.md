@@ -6,6 +6,7 @@
   * [Tools & Frameworks](categories/tools-frameworks.md)
   * [Products & Applications](categories/products-applications.md)
   * [Industry & Business](categories/industry-business.md)
+  * [Open-Source Ecosystem](categories/open-source-ecosystem.md)
 
 * **Benchmarks**
   * [AGI Benchmarks](benchmarks/agi-benchmarks.md)
