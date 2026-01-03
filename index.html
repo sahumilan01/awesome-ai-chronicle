@@ -357,6 +357,18 @@
       }
     }
 
+    .hero-cta {
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideUp 0.6s var(--ease-out-expo) 0.75s forwards;
+    }
+
+    .hero-cta .btn {
+      font-size: 0.9rem;
+      padding: 0.875rem 1.75rem;
+    }
+
     /* ========================================
        DIGEST BANNER
        ======================================== */
@@ -723,6 +735,38 @@
       transform: translateY(-2px);
     }
 
+    .btn-timeline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #fafafa;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.1),
+        0 2px 4px rgba(0,0,0,0.1),
+        0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-timeline:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.1),
+        0 4px 8px rgba(0,0,0,0.15),
+        0 8px 16px rgba(0,0,0,0.1),
+        0 0 30px rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-timeline svg {
+      opacity: 0.8;
+      transition: transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .btn-timeline:hover svg {
+      transform: rotate(360deg);
+    }
+
     /* Button ripple effect */
     .btn-ripple {
       position: absolute;
@@ -1038,6 +1082,15 @@
       <p class="hero-subtitle">A curated timeline tracking breakthroughs, tools, and industry shifts in artificial intelligence—updated as history unfolds.</p>
       <div class="hero-rule"></div>
       <p class="hero-meta">Tracking developments from <strong>2000 to 2026</strong> · Community-sourced · MIT Licensed</p>
+      <div class="hero-cta">
+        <a href="timeline.html" class="btn btn-timeline" data-magnetic>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Explore Visual Timeline
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1187,7 +1240,14 @@
       <h2 class="cta-title">Join the Chronicle</h2>
       <p class="cta-text">Help document AI history. Submit entries, suggest corrections, or star the repository.</p>
       <div class="cta-buttons">
-        <a href="docs.html" class="btn btn-primary" data-magnetic>Read the Chronicle</a>
+        <a href="timeline.html" class="btn btn-primary" data-magnetic>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 0.4rem">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Visual Timeline
+        </a>
+        <a href="docs.html" class="btn btn-secondary" data-magnetic>Read the Chronicle</a>
         <a href="https://github.com/sahumilan01/awesome-ai-chronicle" class="btn btn-secondary" data-magnetic>View on GitHub</a>
       </div>
     </div>

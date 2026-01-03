@@ -1,4 +1,5 @@
 * [Home](/)
+* [Visual Timeline](timeline.html ':target=_blank')
 * [Contributing](CONTRIBUTING.md)
 
 * **Categories**
