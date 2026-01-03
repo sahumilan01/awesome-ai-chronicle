@@ -11,6 +11,9 @@
 * **Benchmarks**
   * [AGI Benchmarks](benchmarks/agi-benchmarks.md)
 
+* **Resources**
+  * [Staying Current](resources/staying-current.md)
+
 * **2025 Digests**
   * [2025 Overview](digests/2025/README.md)
   * [Growth Visualization](digests/2025/growth-visualization.html)
