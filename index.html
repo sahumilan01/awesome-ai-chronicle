@@ -594,6 +594,146 @@
     }
 
     /* ========================================
+       DEEP DIVES SECTION
+       ======================================== */
+    .deep-dives {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .deep-dives-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .deep-dives-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .deep-dives-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1.25rem;
+      }
+    }
+
+    .deep-dive-card {
+      position: relative;
+      padding: 2rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition:
+        border-color var(--duration-normal) var(--ease-smooth),
+        box-shadow var(--duration-normal) var(--ease-smooth),
+        transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .deep-dive-card:not(.deep-dive-coming-soon):hover {
+      border-color: transparent;
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .deep-dive-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 17px;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--ink));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity var(--duration-normal) var(--ease-smooth);
+    }
+
+    .deep-dive-card:not(.deep-dive-coming-soon):hover::before {
+      opacity: 1;
+    }
+
+    .deep-dive-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-glow);
+      padding: 0.3rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .deep-dive-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .deep-dive-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .deep-dive-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .deep-dive-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 1.25rem;
+      transition: gap var(--duration-fast) var(--ease-smooth);
+    }
+
+    .deep-dive-card:hover .deep-dive-cta {
+      gap: 0.6rem;
+    }
+
+    .deep-dive-cta svg {
+      transition: transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .deep-dive-card:hover .deep-dive-cta svg {
+      transform: translate(3px, -3px);
+    }
+
+    .deep-dive-coming-soon {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .deep-dive-status {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 1.25rem;
+    }
+
+    /* ========================================
        SIGNIFICANCE SECTION
        ======================================== */
     .significance {
@@ -1197,6 +1337,42 @@
           <p class="category-desc">Llama, Qwen, DeepSeek, Mistral—the open models, tools, and Hugging Face infrastructure democratizing AI.</p>
         </div>
       </a>
+    </div>
+  </section>
+
+  <div class="divider"><hr class="divider-line"></div>
+
+  <!-- Deep Dives Section -->
+  <section class="deep-dives" id="deep-dives">
+    <div class="section-header reveal">
+      <p class="section-label">Magazine Format</p>
+      <h2 class="section-title">Deep Dives</h2>
+    </div>
+    <div class="deep-dives-grid">
+      <a href="deep-dives/models-research.html" class="deep-dive-card reveal" target="_blank">
+        <div class="deep-dive-badge">Featured</div>
+        <div class="deep-dive-icon">🧠</div>
+        <h3 class="deep-dive-title">Models & Research</h3>
+        <p class="deep-dive-desc">An editorial exploration of AI model evolution from ChatGPT to GPT-4o, Claude 3, and reasoning breakthroughs.</p>
+        <span class="deep-dive-cta">
+          Read Deep Dive
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          </svg>
+        </span>
+      </a>
+      <div class="deep-dive-card deep-dive-coming-soon reveal">
+        <div class="deep-dive-icon">⚒️</div>
+        <h3 class="deep-dive-title">Tools & Frameworks</h3>
+        <p class="deep-dive-desc">LangChain, vLLM, and the infrastructure powering modern AI applications.</p>
+        <span class="deep-dive-status">Coming Soon</span>
+      </div>
+      <div class="deep-dive-card deep-dive-coming-soon reveal">
+        <div class="deep-dive-icon">🏢</div>
+        <h3 class="deep-dive-title">Industry & Business</h3>
+        <p class="deep-dive-desc">The $500B Stargate project, DeepSeek's disruption, and AI's corporate landscape.</p>
+        <span class="deep-dive-status">Coming Soon</span>
+      </div>
     </div>
   </section>
 

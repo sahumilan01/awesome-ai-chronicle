@@ -2,6 +2,9 @@
 * [Visual Timeline](timeline.html ':target=_blank')
 * [Contributing](CONTRIBUTING.md)
 
+* **Deep Dives**
+  * [Models & Research](deep-dives/models-research.html ':target=_blank')
+
 * **Categories**
   * [Models & Research](categories/models-research.md)
   * [Tools & Frameworks](categories/tools-frameworks.md)

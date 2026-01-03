@@ -9,19 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Histography-inspired dark palette */
+      /* Adaptive color system */
       --void: #050507;
       --deep: #0a0a0d;
       --surface: #12121a;
       --elevated: #1a1a24;
       --border: rgba(255, 255, 255, 0.06);
-
-      /* Text */
       --text-primary: #f0f0f2;
       --text-secondary: #8a8a96;
       --text-muted: #5a5a66;
 
-      /* Event colors - vibrant against dark */
+      /* Event significance colors */
       --breakthrough: #ff4757;
       --breakthrough-glow: rgba(255, 71, 87, 0.6);
       --notable: #ffa502;
@@ -29,11 +27,11 @@
       --regular: #57606f;
       --regular-glow: rgba(87, 96, 111, 0.4);
 
-      /* Category colors */
-      --cat-models: #3498db;
-      --cat-products: #9b59b6;
-      --cat-industry: #e67e22;
-      --cat-opensource: #1abc9c;
+      /* Connection type colors */
+      --conn-evolution: #667eea;
+      --conn-cause: #f093fb;
+      --conn-company: #4facfe;
+      --conn-competition: #43e97b;
 
       /* Accent */
       --accent: #667eea;
@@ -46,6 +44,43 @@
       /* Transitions */
       --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Light theme */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --void: #fafafa;
+        --deep: #ffffff;
+        --surface: #f5f5f5;
+        --elevated: #eeeeee;
+        --border: rgba(0, 0, 0, 0.08);
+        --text-primary: #1a1a1a;
+        --text-secondary: #666666;
+        --text-muted: #999999;
+      }
+    }
+
+    /* Manual theme override */
+    [data-theme="dark"] {
+      --void: #050507;
+      --deep: #0a0a0d;
+      --surface: #12121a;
+      --elevated: #1a1a24;
+      --border: rgba(255, 255, 255, 0.06);
+      --text-primary: #f0f0f2;
+      --text-secondary: #8a8a96;
+      --text-muted: #5a5a66;
+    }
+
+    [data-theme="light"] {
+      --void: #fafafa;
+      --deep: #ffffff;
+      --surface: #f5f5f5;
+      --elevated: #eeeeee;
+      --border: rgba(0, 0, 0, 0.08);
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
     }
 
     * {
@@ -64,9 +99,10 @@
       background: var(--void);
       color: var(--text-primary);
       cursor: crosshair;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    /* Noise texture overlay */
+    /* Noise texture overlay - only in dark mode */
     body::before {
       content: '';
       position: fixed;
@@ -78,6 +114,13 @@
       opacity: 0.03;
       pointer-events: none;
       z-index: 1000;
+    }
+
+    [data-theme="light"] body::before,
+    @media (prefers-color-scheme: light) {
+      body::before {
+        opacity: 0.015;
+      }
     }
 
     /* Gradient atmosphere */
@@ -93,6 +136,11 @@
         radial-gradient(ellipse 50% 50% at 0% 50%, rgba(26, 188, 156, 0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    [data-theme="light"] .atmosphere {
+      opacity: 0.5;
     }
 
     /* ========================================
@@ -104,7 +152,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.5rem 2.5rem;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -121,39 +169,64 @@
 
     .logo-main {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 500;
       letter-spacing: -0.02em;
     }
 
     .logo-sub {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
       font-weight: 300;
     }
 
-    .header-right {
+    .header-center {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     .zoom-level {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 500;
       color: var(--text-secondary);
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 100px;
       letter-spacing: 0.05em;
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--elevated);
+      color: var(--text-primary);
+    }
+
     .back-link {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
       text-decoration: none;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 6px;
       transition: all 0.2s ease;
     }
@@ -162,6 +235,61 @@
       color: var(--text-primary);
       background: var(--surface);
     }
+
+    /* ========================================
+       CONNECTION FILTERS
+       ======================================== */
+    .filter-bar {
+      position: fixed;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      backdrop-filter: blur(12px);
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-secondary);
+      background: var(--elevated);
+    }
+
+    .filter-btn.active {
+      color: var(--text-primary);
+      background: var(--elevated);
+    }
+
+    .filter-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .filter-dot.evolution { background: var(--conn-evolution); }
+    .filter-dot.cause { background: var(--conn-cause); }
+    .filter-dot.company { background: var(--conn-company); }
 
     /* ========================================
        MAIN TIMELINE CANVAS
@@ -181,17 +309,45 @@
       display: block;
     }
 
+    /* Connection paths */
+    .connection-path {
+      fill: none;
+      stroke-width: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .connection-path.evolution { stroke: var(--conn-evolution); }
+    .connection-path.cause { stroke: var(--conn-cause); }
+    .connection-path.company { stroke: var(--conn-company); }
+
+    .connection-path.visible {
+      opacity: 0.6;
+    }
+
+    .connection-path.highlight {
+      opacity: 1;
+      stroke-width: 3;
+    }
+
     /* Event dots */
     .event-dot {
       cursor: pointer;
-      transition: filter 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .event-dot:hover {
       filter: brightness(1.3);
     }
 
-    /* Glow filter definitions are in SVG */
+    .event-dot.dimmed {
+      opacity: 0.2 !important;
+    }
+
+    .event-dot.highlighted {
+      filter: brightness(1.4) drop-shadow(0 0 8px currentColor);
+    }
 
     /* ========================================
        TOOLTIP
@@ -215,45 +371,45 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem 1.25rem;
-      min-width: 220px;
-      max-width: 320px;
+      min-width: 240px;
+      max-width: 340px;
       backdrop-filter: blur(20px);
       box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.3),
-        0 12px 24px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 12px 24px rgba(0, 0, 0, 0.3);
     }
 
     .tooltip-date {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--text-muted);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
 
     .tooltip-title {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 500;
       line-height: 1.35;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       color: var(--text-primary);
     }
 
     .tooltip-meta {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
     }
 
     .tooltip-significance {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 0.25rem 0.5rem;
+      padding: 0.2rem 0.4rem;
       border-radius: 4px;
     }
 
@@ -273,8 +429,40 @@
     }
 
     .tooltip-category {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: var(--text-muted);
+    }
+
+    .tooltip-connections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tooltip-conn {
+      font-size: 0.55rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .tooltip-conn.evolution {
+      background: rgba(102, 126, 234, 0.2);
+      color: var(--conn-evolution);
+    }
+
+    .tooltip-conn.cause {
+      background: rgba(240, 147, 251, 0.2);
+      color: var(--conn-cause);
+    }
+
+    .tooltip-conn.company {
+      background: rgba(79, 172, 254, 0.2);
+      color: var(--conn-company);
     }
 
     /* ========================================
@@ -284,7 +472,7 @@
       position: fixed;
       top: 0;
       right: 0;
-      width: 420px;
+      width: 440px;
       height: 100%;
       background: var(--deep);
       border-left: 1px solid var(--border);
@@ -341,13 +529,13 @@
 
     .panel-badge {
       display: inline-block;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      padding: 0.4rem 0.8rem;
+      padding: 0.35rem 0.7rem;
       border-radius: 100px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .panel-badge.breakthrough {
@@ -367,39 +555,105 @@
     }
 
     .panel-date {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
       font-weight: 500;
     }
 
     .panel-title {
       font-family: var(--font-display);
-      font-size: 1.75rem;
+      font-size: 1.6rem;
       font-weight: 500;
       line-height: 1.25;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       letter-spacing: -0.02em;
     }
 
     .panel-description {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       line-height: 1.75;
       color: var(--text-secondary);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .panel-section-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .panel-connections {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .panel-conn-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .panel-conn-item:hover {
+      background: var(--elevated);
+      transform: translateX(4px);
+    }
+
+    .panel-conn-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .panel-conn-dot.evolution { background: var(--conn-evolution); }
+    .panel-conn-dot.cause { background: var(--conn-cause); }
+    .panel-conn-dot.company { background: var(--conn-company); }
+
+    .panel-conn-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .panel-conn-title {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .panel-conn-type {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .panel-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
     }
 
     .panel-tag {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 500;
-      padding: 0.3rem 0.6rem;
+      padding: 0.25rem 0.5rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 4px;
@@ -410,11 +664,11 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
       color: var(--accent);
       text-decoration: none;
-      padding: 0.75rem 1.25rem;
+      padding: 0.65rem 1rem;
       background: rgba(102, 126, 234, 0.1);
       border: 1px solid rgba(102, 126, 234, 0.2);
       border-radius: 8px;
@@ -435,7 +689,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.5rem 2.5rem 2rem;
+      padding: 1.25rem 2rem 1.5rem;
       background: linear-gradient(to top, var(--void) 0%, var(--void) 50%, transparent 100%);
       display: flex;
       justify-content: space-between;
@@ -444,14 +698,14 @@
 
     .legend {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
+      gap: 0.4rem;
+      font-size: 0.65rem;
       font-weight: 500;
       color: var(--text-muted);
       letter-spacing: 0.03em;
@@ -469,7 +723,7 @@
 
     .instructions {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       opacity: 1;
       transition: opacity 0.5s ease;
     }
@@ -481,15 +735,15 @@
     .instruction {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.7rem;
+      gap: 0.5rem;
+      font-size: 0.65rem;
       color: var(--text-muted);
     }
 
     .instruction-key {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
-      padding: 0.3rem 0.6rem;
+      padding: 0.25rem 0.5rem;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 4px;
@@ -502,7 +756,7 @@
     .year-marker {
       fill: var(--text-muted);
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.05em;
     }
@@ -513,7 +767,7 @@
     }
 
     .axis-line {
-      stroke: rgba(255, 255, 255, 0.08);
+      stroke: var(--border);
       stroke-width: 1;
     }
 
@@ -522,11 +776,23 @@
        ======================================== */
     @media (max-width: 768px) {
       .header {
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.25rem;
       }
 
       .logo-main {
         font-size: 1.1rem;
+      }
+
+      .filter-bar {
+        top: auto;
+        bottom: 80px;
+        gap: 0.25rem;
+        padding: 0.4rem;
+      }
+
+      .filter-btn {
+        font-size: 0.55rem;
+        padding: 0.35rem 0.5rem;
       }
 
       .detail-panel {
@@ -534,14 +800,18 @@
       }
 
       .bottom-bar {
-        padding: 1rem 1.5rem 1.5rem;
+        padding: 1rem 1.25rem 1.25rem;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.75rem;
         align-items: center;
       }
 
       .instructions {
         display: none;
+      }
+
+      .legend {
+        gap: 1rem;
       }
     }
 
@@ -564,11 +834,38 @@
       <span class="logo-main">AI Chronicle</span>
       <span class="logo-sub">Timeline</span>
     </a>
-    <div class="header-right">
+    <div class="header-center">
       <div class="zoom-level" id="zoomLevel">2022 — 2025</div>
-      <a href="index.html" class="back-link">← Back to Chronicle</a>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+      <a href="index.html" class="back-link">← Back</a>
     </div>
   </header>
+
+  <!-- Connection Filters -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">
+      All Events
+    </button>
+    <button class="filter-btn" data-filter="evolution">
+      <span class="filter-dot evolution"></span>
+      Evolution
+    </button>
+    <button class="filter-btn" data-filter="cause">
+      <span class="filter-dot cause"></span>
+      Cause & Effect
+    </button>
+    <button class="filter-btn" data-filter="company">
+      <span class="filter-dot company"></span>
+      Company
+    </button>
+  </div>
 
   <!-- Main Timeline -->
   <div class="timeline-wrapper">
@@ -596,6 +893,16 @@
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
+        <!-- Arrow marker for connections -->
+        <marker id="arrow-evolution" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--conn-evolution)"/>
+        </marker>
+        <marker id="arrow-cause" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--conn-cause)"/>
+        </marker>
+        <marker id="arrow-company" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--conn-company)"/>
+        </marker>
       </defs>
     </svg>
   </div>
@@ -609,6 +916,7 @@
         <span class="tooltip-significance" id="tooltipSignificance"></span>
         <span class="tooltip-category" id="tooltipCategory"></span>
       </div>
+      <div class="tooltip-connections" id="tooltipConnections"></div>
     </div>
   </div>
 
@@ -624,7 +932,15 @@
       <div class="panel-date" id="panelDate"></div>
       <h2 class="panel-title" id="panelTitle"></h2>
       <p class="panel-description" id="panelDescription"></p>
+
+      <div id="panelConnectionsSection">
+        <h3 class="panel-section-title">Connected Events</h3>
+        <div class="panel-connections" id="panelConnections"></div>
+      </div>
+
+      <h3 class="panel-section-title">Tags</h3>
       <div class="panel-tags" id="panelTags"></div>
+
       <a class="panel-link" id="panelLink" href="#" target="_blank">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -662,15 +978,15 @@
         <span>Pan</span>
       </div>
       <div class="instruction">
-        <span class="instruction-key">Click</span>
-        <span>Details</span>
+        <span class="instruction-key">Hover</span>
+        <span>Connections</span>
       </div>
     </div>
   </div>
 
   <script>
     // ============================================
-    // AI CHRONICLE EVENT DATA
+    // AI CHRONICLE EVENT DATA WITH CONNECTIONS
     // ============================================
     const events = [
       // 2022
@@ -680,9 +996,14 @@
         title: "ChatGPT Launched",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI releases ChatGPT, bringing conversational AI to mainstream attention. Within 5 days, it reached 1 million users, becoming the fastest-growing consumer application in history.",
         source: "https://openai.com/blog/chatgpt",
-        tags: ["openai", "chatgpt", "consumer"]
+        tags: ["openai", "chatgpt", "consumer"],
+        connections: [
+          { to: "gpt4-release", type: "evolution", label: "Led to GPT-4" },
+          { to: "claude2-release", type: "cause", label: "Sparked competition" }
+        ]
       },
       // 2023
       {
@@ -691,9 +1012,15 @@
         title: "GPT-4 Released",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI releases GPT-4, a large multimodal model accepting image and text inputs. It demonstrated human-level performance on various professional exams.",
         source: "https://openai.com/research/gpt-4",
-        tags: ["openai", "gpt4", "multimodal"]
+        tags: ["openai", "gpt4", "multimodal"],
+        connections: [
+          { to: "chatgpt-launch", type: "evolution", label: "Built on ChatGPT" },
+          { to: "gpt4-turbo", type: "evolution", label: "Evolved to Turbo" },
+          { to: "claude3-release", type: "cause", label: "Prompted Claude 3" }
+        ]
       },
       {
         id: "midjourney-v5",
@@ -701,9 +1028,11 @@
         title: "Midjourney V5 Released",
         significance: "notable",
         category: "Products & Apps",
+        company: "midjourney",
         description: "Midjourney releases version 5 with dramatically improved photorealism and hand rendering capabilities.",
         source: "https://midjourney.com",
-        tags: ["midjourney", "image-gen", "creative"]
+        tags: ["midjourney", "image-gen", "creative"],
+        connections: []
       },
       {
         id: "claude2-release",
@@ -711,9 +1040,14 @@
         title: "Claude 2 Released",
         significance: "notable",
         category: "Models & Research",
+        company: "anthropic",
         description: "Anthropic releases Claude 2 with improved coding, math, and reasoning capabilities, along with a 100K context window.",
         source: "https://www.anthropic.com/news/claude-2",
-        tags: ["anthropic", "claude", "llm"]
+        tags: ["anthropic", "claude", "llm"],
+        connections: [
+          { to: "claude3-release", type: "evolution", label: "Evolved to Claude 3" },
+          { to: "chatgpt-launch", type: "cause", label: "Response to ChatGPT" }
+        ]
       },
       {
         id: "llama2-opensource",
@@ -721,9 +1055,14 @@
         title: "Llama 2 Open-Sourced",
         significance: "breakthrough",
         category: "Open Source",
+        company: "meta",
         description: "Meta releases Llama 2 under a permissive license for research and commercial use, igniting the open-source LLM movement.",
         source: "https://ai.meta.com/llama/",
-        tags: ["meta", "llama", "open-source"]
+        tags: ["meta", "llama", "open-source"],
+        connections: [
+          { to: "llama3-release", type: "evolution", label: "Evolved to Llama 3" },
+          { to: "deepseek-r1", type: "cause", label: "Inspired open models" }
+        ]
       },
       {
         id: "gpt4-turbo",
@@ -731,9 +1070,14 @@
         title: "GPT-4 Turbo at DevDay",
         significance: "notable",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI announces GPT-4 Turbo with 128K context, lower pricing, and JSON mode at their first DevDay conference.",
         source: "https://openai.com/blog/devday",
-        tags: ["openai", "gpt4", "devday"]
+        tags: ["openai", "gpt4", "devday"],
+        connections: [
+          { to: "gpt4-release", type: "evolution", label: "Turbo version" },
+          { to: "gpt4o-announce", type: "evolution", label: "Led to GPT-4o" }
+        ]
       },
       {
         id: "gemini-launch",
@@ -741,9 +1085,14 @@
         title: "Google Gemini Launched",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "google",
         description: "Google DeepMind launches Gemini, a natively multimodal model family designed to understand text, images, audio, and video together.",
         source: "https://blog.google/technology/ai/google-gemini-ai/",
-        tags: ["google", "gemini", "multimodal"]
+        tags: ["google", "gemini", "multimodal"],
+        connections: [
+          { to: "gemini-1m-context", type: "evolution", label: "Led to 1.5" },
+          { to: "gemini2-flash", type: "evolution", label: "Led to 2.0" }
+        ]
       },
       // 2024
       {
@@ -752,19 +1101,14 @@
         title: "Gemini 1.5: 1M Token Context",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "google",
         description: "Google announces Gemini 1.5 Pro with a breakthrough 1 million token context window, enabling analysis of entire codebases and hour-long videos.",
         source: "https://blog.google/technology/ai/google-gemini-next-generation-model-february-2024/",
-        tags: ["google", "gemini", "context-window"]
-      },
-      {
-        id: "claude3-release",
-        date: "2024-03-04",
-        title: "Claude 3 Family Released",
-        significance: "breakthrough",
-        category: "Models & Research",
-        description: "Anthropic releases Claude 3 (Haiku, Sonnet, Opus) with Opus achieving state-of-the-art on multiple benchmarks and near-human reasoning.",
-        source: "https://www.anthropic.com/news/claude-3-family",
-        tags: ["anthropic", "claude", "llm"]
+        tags: ["google", "gemini", "context-window"],
+        connections: [
+          { to: "gemini-launch", type: "evolution", label: "Evolved from Gemini" },
+          { to: "gemini2-flash", type: "evolution", label: "Led to 2.0" }
+        ]
       },
       {
         id: "sora-preview",
@@ -772,9 +1116,27 @@
         title: "Sora Video Generation Preview",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI previews Sora, a text-to-video model capable of generating photorealistic minute-long videos from text prompts.",
         source: "https://openai.com/sora",
-        tags: ["openai", "sora", "video-gen"]
+        tags: ["openai", "sora", "video-gen"],
+        connections: []
+      },
+      {
+        id: "claude3-release",
+        date: "2024-03-04",
+        title: "Claude 3 Family Released",
+        significance: "breakthrough",
+        category: "Models & Research",
+        company: "anthropic",
+        description: "Anthropic releases Claude 3 (Haiku, Sonnet, Opus) with Opus achieving state-of-the-art on multiple benchmarks and near-human reasoning.",
+        source: "https://www.anthropic.com/news/claude-3-family",
+        tags: ["anthropic", "claude", "llm"],
+        connections: [
+          { to: "claude2-release", type: "evolution", label: "Evolved from Claude 2" },
+          { to: "claude-35-sonnet", type: "evolution", label: "Led to 3.5 Sonnet" },
+          { to: "gpt4-release", type: "cause", label: "Response to GPT-4" }
+        ]
       },
       {
         id: "llama3-release",
@@ -782,9 +1144,14 @@
         title: "Llama 3 Released",
         significance: "notable",
         category: "Open Source",
+        company: "meta",
         description: "Meta releases Llama 3 (8B and 70B) with improved performance and 8K context window, competitive with GPT-3.5.",
         source: "https://ai.meta.com/blog/meta-llama-3/",
-        tags: ["meta", "llama", "open-source"]
+        tags: ["meta", "llama", "open-source"],
+        connections: [
+          { to: "llama2-opensource", type: "evolution", label: "Evolved from Llama 2" },
+          { to: "llama31-405b", type: "evolution", label: "Led to 3.1" }
+        ]
       },
       {
         id: "gpt4o-announce",
@@ -792,19 +1159,14 @@
         title: "GPT-4o Announced",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI announces GPT-4o with native audio, vision, and text capabilities in a single model, enabling real-time conversational AI.",
         source: "https://openai.com/index/hello-gpt-4o/",
-        tags: ["openai", "gpt4", "multimodal"]
-      },
-      {
-        id: "llama31-405b",
-        date: "2024-07-23",
-        title: "Llama 3.1 405B Released",
-        significance: "breakthrough",
-        category: "Open Source",
-        description: "Meta releases Llama 3.1 including the first open-source 400B+ parameter model with 128K context, competitive with GPT-4.",
-        source: "https://ai.meta.com/blog/meta-llama-3-1/",
-        tags: ["meta", "llama", "open-source"]
+        tags: ["openai", "gpt4", "multimodal"],
+        connections: [
+          { to: "gpt4-turbo", type: "evolution", label: "Evolved from Turbo" },
+          { to: "o1-preview", type: "evolution", label: "Led to o1" }
+        ]
       },
       {
         id: "claude-35-sonnet",
@@ -812,9 +1174,29 @@
         title: "Claude 3.5 Sonnet Released",
         significance: "notable",
         category: "Models & Research",
+        company: "anthropic",
         description: "Anthropic releases Claude 3.5 Sonnet, outperforming Claude 3 Opus on most benchmarks at a fraction of the cost.",
         source: "https://www.anthropic.com/news/claude-3-5-sonnet",
-        tags: ["anthropic", "claude", "llm"]
+        tags: ["anthropic", "claude", "llm"],
+        connections: [
+          { to: "claude3-release", type: "evolution", label: "Evolved from Claude 3" },
+          { to: "claude-opus-45", type: "evolution", label: "Led to Opus 4.5" }
+        ]
+      },
+      {
+        id: "llama31-405b",
+        date: "2024-07-23",
+        title: "Llama 3.1 405B Released",
+        significance: "breakthrough",
+        category: "Open Source",
+        company: "meta",
+        description: "Meta releases Llama 3.1 including the first open-source 400B+ parameter model with 128K context, competitive with GPT-4.",
+        source: "https://ai.meta.com/blog/meta-llama-3-1/",
+        tags: ["meta", "llama", "open-source"],
+        connections: [
+          { to: "llama3-release", type: "evolution", label: "Evolved from Llama 3" },
+          { to: "deepseek-r1", type: "cause", label: "Inspired DeepSeek" }
+        ]
       },
       {
         id: "o1-preview",
@@ -822,9 +1204,15 @@
         title: "OpenAI o1 Preview Released",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI releases o1-preview, a new reasoning model that 'thinks before answering' using chain-of-thought, achieving breakthroughs in math and coding.",
         source: "https://openai.com/index/introducing-openai-o1-preview/",
-        tags: ["openai", "o1", "reasoning"]
+        tags: ["openai", "o1", "reasoning"],
+        connections: [
+          { to: "gpt4o-announce", type: "evolution", label: "New paradigm from GPT-4o" },
+          { to: "o3-arc-agi", type: "evolution", label: "Led to o3" },
+          { to: "deepseek-r1", type: "cause", label: "Inspired DeepSeek R1" }
+        ]
       },
       {
         id: "gemini2-flash",
@@ -832,9 +1220,13 @@
         title: "Gemini 2.0 Flash Released",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "google",
         description: "Google releases Gemini 2.0 Flash with native multimodal output and agentic capabilities, enabling AI agents that can take actions.",
         source: "https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/",
-        tags: ["google", "gemini", "agents"]
+        tags: ["google", "gemini", "agents"],
+        connections: [
+          { to: "gemini-1m-context", type: "evolution", label: "Evolved from 1.5" }
+        ]
       },
       {
         id: "o3-arc-agi",
@@ -842,9 +1234,13 @@
         title: "o3 Achieves 87.5% on ARC-AGI",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "openai",
         description: "OpenAI's o3 model achieves 87.5% on ARC-AGI, surpassing the 85% human threshold for the first time. A landmark in AI reasoning.",
         source: "https://arcprize.org/blog/oai-o3-pub-breakthrough",
-        tags: ["openai", "o3", "arc-agi", "reasoning"]
+        tags: ["openai", "o3", "arc-agi", "reasoning"],
+        connections: [
+          { to: "o1-preview", type: "evolution", label: "Evolved from o1" }
+        ]
       },
       // 2025
       {
@@ -853,19 +1249,15 @@
         title: "DeepSeek R1: China's Sputnik Moment",
         significance: "breakthrough",
         category: "Open Source",
+        company: "deepseek",
         description: "DeepSeek released R1, an open-source reasoning model matching OpenAI o1 performance at ~$6M training cost vs $100M+, with MIT license.",
         source: "https://api-docs.deepseek.com/news/news250120",
-        tags: ["deepseek", "open-source", "china", "reasoning"]
-      },
-      {
-        id: "stargate-project",
-        date: "2025-01-21",
-        title: "Stargate: $500B AI Infrastructure",
-        significance: "breakthrough",
-        category: "Industry & Business",
-        description: "OpenAI, SoftBank, Oracle, and MGX announced the Stargate Project, a $500 billion joint venture to build AI data centers across the United States.",
-        source: "https://openai.com/index/announcing-the-stargate-project/",
-        tags: ["openai", "infrastructure", "funding"]
+        tags: ["deepseek", "open-source", "china", "reasoning"],
+        connections: [
+          { to: "o1-preview", type: "cause", label: "Response to o1" },
+          { to: "llama31-405b", type: "cause", label: "Built on open source movement" },
+          { to: "nvidia-500b-loss", type: "cause", label: "Caused Nvidia crash" }
+        ]
       },
       {
         id: "trump-ai-eo",
@@ -873,9 +1265,23 @@
         title: "Trump Revokes Biden AI Order",
         significance: "notable",
         category: "Industry & Business",
+        company: "government",
         description: "On his first day back in office, President Trump revoked the Biden administration's executive order on AI safety, signaling a policy shift.",
         source: "https://www.whitehouse.gov/",
-        tags: ["policy", "regulation", "government"]
+        tags: ["policy", "regulation", "government"],
+        connections: []
+      },
+      {
+        id: "stargate-project",
+        date: "2025-01-21",
+        title: "Stargate: $500B AI Infrastructure",
+        significance: "breakthrough",
+        category: "Industry & Business",
+        company: "openai",
+        description: "OpenAI, SoftBank, Oracle, and MGX announced the Stargate Project, a $500 billion joint venture to build AI data centers across the United States.",
+        source: "https://openai.com/index/announcing-the-stargate-project/",
+        tags: ["openai", "infrastructure", "funding"],
+        connections: []
       },
       {
         id: "nvidia-500b-loss",
@@ -883,9 +1289,13 @@
         title: "Nvidia Loses $500B Market Cap",
         significance: "notable",
         category: "Industry & Business",
+        company: "nvidia",
         description: "Following DeepSeek R1's release, Nvidia experienced a historic single-day loss as investors questioned expensive AI infrastructure needs.",
         source: "https://www.bloomberg.com/",
-        tags: ["nvidia", "market", "deepseek"]
+        tags: ["nvidia", "market", "deepseek"],
+        connections: [
+          { to: "deepseek-r1", type: "cause", label: "Caused by DeepSeek R1" }
+        ]
       },
       {
         id: "claude-opus-45",
@@ -893,20 +1303,27 @@
         title: "Claude Opus 4.5 Released",
         significance: "breakthrough",
         category: "Models & Research",
+        company: "anthropic",
         description: "Anthropic releases Claude Opus 4.5, their most capable model yet with hybrid extended thinking and enhanced creative abilities.",
         source: "https://www.anthropic.com/",
-        tags: ["anthropic", "claude", "reasoning"]
+        tags: ["anthropic", "claude", "reasoning"],
+        connections: [
+          { to: "claude-35-sonnet", type: "evolution", label: "Evolved from 3.5" }
+        ]
       }
     ];
+
+    // Build connection lookup
+    const eventMap = new Map(events.map(e => [e.id, e]));
 
     // ============================================
     // CONFIGURATION
     // ============================================
     const config = {
-      margin: { top: 100, right: 80, bottom: 140, left: 80 },
+      margin: { top: 120, right: 80, bottom: 120, left: 80 },
       dotRadius: {
-        breakthrough: 12,
-        notable: 8,
+        breakthrough: 11,
+        notable: 7,
         regular: 5
       },
       colors: {
@@ -914,12 +1331,61 @@
         notable: '#ffa502',
         regular: '#57606f'
       },
+      connectionColors: {
+        evolution: '#667eea',
+        cause: '#f093fb',
+        company: '#4facfe'
+      },
       minDate: new Date('2022-06-01'),
       maxDate: new Date('2025-06-01')
     };
 
     // ============================================
-    // INITIALIZE VISUALIZATION
+    // STATE
+    // ============================================
+    let width, height, innerWidth, innerHeight;
+    let xScale;
+    let currentTransform = d3.zoomIdentity;
+    let g, connectionsGroup, dotsGroup, axisGroup;
+    let activeFilter = 'all';
+    let hoveredEvent = null;
+
+    // ============================================
+    // THEME HANDLING
+    // ============================================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function getPreferredTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateThemeIcon(theme);
+    }
+
+    function updateThemeIcon(theme) {
+      if (theme === 'dark') {
+        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+      } else {
+        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Initialize theme
+    setTheme(getPreferredTheme());
+
+    // ============================================
+    // SVG INITIALIZATION
     // ============================================
     const svg = d3.select('#timeline-svg');
     const tooltip = document.getElementById('tooltip');
@@ -927,16 +1393,12 @@
     const zoomLevelEl = document.getElementById('zoomLevel');
     const instructionsEl = document.getElementById('instructions');
 
-    let width, height, innerWidth, innerHeight;
-    let xScale, yBand;
-    let currentTransform = d3.zoomIdentity;
-    let g, dotsGroup, axisGroup;
-
-    // Parse dates and assign vertical positions
+    // Parse dates and assign vertical positions (deterministic based on index)
     events.forEach((e, i) => {
       e.dateObj = new Date(e.date);
-      // Distribute events vertically with some randomness
-      e.yOffset = 0.15 + Math.random() * 0.7; // Keep within 15%-85% of height
+      // Use seeded random based on id for consistent positioning
+      const seed = e.id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+      e.yOffset = 0.15 + (seed % 70) / 100; // 15%-85% range
     });
 
     // Sort by date
@@ -951,7 +1413,7 @@
 
       svg.attr('width', width).attr('height', height);
 
-      // Clear existing
+      // Clear existing groups
       svg.selectAll('g.main-group').remove();
 
       // Main group with margins
@@ -959,10 +1421,9 @@
         .attr('class', 'main-group')
         .attr('transform', `translate(${config.margin.left},${config.margin.top})`);
 
-      // Axis group (below dots)
+      // Layer order: axis -> connections -> dots
       axisGroup = g.append('g').attr('class', 'axis-group');
-
-      // Dots group
+      connectionsGroup = g.append('g').attr('class', 'connections-group');
       dotsGroup = g.append('g').attr('class', 'dots-group');
 
       // Scale
@@ -971,6 +1432,9 @@
         .range([0, innerWidth]);
     }
 
+    // ============================================
+    // RENDER FUNCTIONS
+    // ============================================
     function renderAxis(transform) {
       const newXScale = transform.rescaleX(xScale);
       const domain = newXScale.domain();
@@ -979,7 +1443,7 @@
       const formatDate = d3.timeFormat('%b %Y');
       zoomLevelEl.textContent = `${formatDate(domain[0])} — ${formatDate(domain[1])}`;
 
-      // Determine appropriate tick interval
+      // Determine tick interval
       const rangeYears = (domain[1] - domain[0]) / (1000 * 60 * 60 * 24 * 365);
       let ticks, tickFormat;
 
@@ -1009,7 +1473,6 @@
       tickValues.forEach(tick => {
         const x = newXScale(tick);
         if (x >= -50 && x <= innerWidth + 50) {
-          // Vertical tick line
           axisGroup.append('line')
             .attr('class', 'year-line')
             .attr('x1', x)
@@ -1019,15 +1482,67 @@
             .style('stroke-dasharray', '2,4')
             .style('opacity', 0.3);
 
-          // Label
           axisGroup.append('text')
             .attr('class', 'year-marker')
             .attr('x', x)
-            .attr('y', innerHeight + 30)
+            .attr('y', innerHeight + 25)
             .attr('text-anchor', 'middle')
             .text(tickFormat(tick));
         }
       });
+    }
+
+    function renderConnections(transform) {
+      const newXScale = transform.rescaleX(xScale);
+
+      // Build connection data
+      const connectionData = [];
+      events.forEach(source => {
+        if (source.connections) {
+          source.connections.forEach(conn => {
+            const target = eventMap.get(conn.to);
+            if (target) {
+              connectionData.push({
+                source,
+                target,
+                type: conn.type,
+                label: conn.label
+              });
+            }
+          });
+        }
+      });
+
+      // Filter by active filter
+      const filteredConnections = activeFilter === 'all'
+        ? connectionData
+        : connectionData.filter(c => c.type === activeFilter);
+
+      // Draw curved paths
+      const paths = connectionsGroup.selectAll('.connection-path')
+        .data(filteredConnections, d => `${d.source.id}-${d.target.id}`);
+
+      paths.enter()
+        .append('path')
+        .attr('class', d => `connection-path ${d.type}`)
+        .attr('marker-end', d => `url(#arrow-${d.type})`)
+        .merge(paths)
+        .attr('d', d => {
+          const x1 = newXScale(d.source.dateObj);
+          const y1 = innerHeight * d.source.yOffset;
+          const x2 = newXScale(d.target.dateObj);
+          const y2 = innerHeight * d.target.yOffset;
+
+          // Curved path
+          const midX = (x1 + x2) / 2;
+          const midY = (y1 + y2) / 2;
+          const curveOffset = Math.abs(y2 - y1) * 0.3 + 30;
+          const controlY = Math.min(y1, y2) - curveOffset;
+
+          return `M ${x1} ${y1} Q ${midX} ${controlY} ${x2} ${y2}`;
+        });
+
+      paths.exit().remove();
     }
 
     function renderDots(transform) {
@@ -1053,9 +1568,9 @@
 
       // Animate entrance
       dotsEnter.transition()
-        .duration(800)
-        .delay((d, i) => i * 40)
-        .ease(d3.easeElasticOut.amplitude(1).period(0.4))
+        .duration(600)
+        .delay((d, i) => i * 30)
+        .ease(d3.easeElasticOut.amplitude(1).period(0.5))
         .attr('r', d => config.dotRadius[d.significance]);
 
       // Update positions
@@ -1069,15 +1584,74 @@
     // ============================================
     function handleMouseEnter(event, d) {
       instructionsEl.classList.add('hidden');
+      hoveredEvent = d;
 
-      // Highlight dot
+      // Highlight this dot
       d3.select(this)
+        .classed('highlighted', true)
         .transition()
         .duration(150)
-        .attr('r', config.dotRadius[d.significance] * 1.4);
+        .attr('r', config.dotRadius[d.significance] * 1.5);
 
-      // Show tooltip
-      const tooltipEl = document.getElementById('tooltip');
+      // Get connected event IDs
+      const connectedIds = new Set([d.id]);
+      if (d.connections) {
+        d.connections.forEach(c => connectedIds.add(c.to));
+      }
+      // Also find events that connect TO this event
+      events.forEach(e => {
+        if (e.connections) {
+          e.connections.forEach(c => {
+            if (c.to === d.id) connectedIds.add(e.id);
+          });
+        }
+      });
+
+      // Dim unconnected dots
+      dotsGroup.selectAll('.event-dot')
+        .classed('dimmed', e => !connectedIds.has(e.id))
+        .classed('highlighted', e => connectedIds.has(e.id) && e.id !== d.id);
+
+      // Show relevant connections
+      connectionsGroup.selectAll('.connection-path')
+        .classed('visible', c => c.source.id === d.id || c.target.id === d.id)
+        .classed('highlight', c => c.source.id === d.id || c.target.id === d.id);
+
+      // Update tooltip
+      updateTooltip(d, event);
+    }
+
+    function handleMouseMove(event) {
+      if (hoveredEvent) {
+        positionTooltip(event);
+      }
+    }
+
+    function handleMouseLeave(event, d) {
+      hoveredEvent = null;
+
+      // Reset dot
+      d3.select(this)
+        .classed('highlighted', false)
+        .transition()
+        .duration(200)
+        .attr('r', config.dotRadius[d.significance]);
+
+      // Reset all dots
+      dotsGroup.selectAll('.event-dot')
+        .classed('dimmed', false)
+        .classed('highlighted', false);
+
+      // Hide connections
+      connectionsGroup.selectAll('.connection-path')
+        .classed('visible', false)
+        .classed('highlight', false);
+
+      // Hide tooltip
+      tooltip.classList.remove('visible');
+    }
+
+    function updateTooltip(d, event) {
       document.getElementById('tooltipDate').textContent = d3.timeFormat('%B %d, %Y')(d.dateObj);
       document.getElementById('tooltipTitle').textContent = d.title;
 
@@ -1087,16 +1661,27 @@
 
       document.getElementById('tooltipCategory').textContent = d.category;
 
-      tooltipEl.classList.add('visible');
+      // Show connections in tooltip
+      const connEl = document.getElementById('tooltipConnections');
+      if (d.connections && d.connections.length > 0) {
+        connEl.style.display = 'flex';
+        connEl.innerHTML = d.connections.map(c => {
+          const target = eventMap.get(c.to);
+          return `<span class="tooltip-conn ${c.type}">${c.label}</span>`;
+        }).join('');
+      } else {
+        connEl.style.display = 'none';
+      }
+
+      tooltip.classList.add('visible');
+      positionTooltip(event);
     }
 
-    function handleMouseMove(event) {
-      const tooltipEl = document.getElementById('tooltip');
-      const rect = tooltipEl.getBoundingClientRect();
+    function positionTooltip(event) {
+      const rect = tooltip.getBoundingClientRect();
       let x = event.clientX + 20;
       let y = event.clientY - rect.height / 2;
 
-      // Keep in viewport
       if (x + rect.width > window.innerWidth - 20) {
         x = event.clientX - rect.width - 20;
       }
@@ -1105,17 +1690,8 @@
         y = window.innerHeight - rect.height - 20;
       }
 
-      tooltipEl.style.left = x + 'px';
-      tooltipEl.style.top = y + 'px';
-    }
-
-    function handleMouseLeave(event, d) {
-      d3.select(this)
-        .transition()
-        .duration(200)
-        .attr('r', config.dotRadius[d.significance]);
-
-      document.getElementById('tooltip').classList.remove('visible');
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
     }
 
     function handleClick(event, d) {
@@ -1123,19 +1699,69 @@
       openDetailPanel(d);
     }
 
-    function openDetailPanel(event) {
+    function openDetailPanel(eventData) {
       const badge = document.getElementById('panelBadge');
-      badge.textContent = event.significance;
-      badge.className = 'panel-badge ' + event.significance;
+      badge.textContent = eventData.significance;
+      badge.className = 'panel-badge ' + eventData.significance;
 
-      document.getElementById('panelDate').textContent = d3.timeFormat('%B %d, %Y')(event.dateObj);
-      document.getElementById('panelTitle').textContent = event.title;
-      document.getElementById('panelDescription').textContent = event.description;
+      document.getElementById('panelDate').textContent = d3.timeFormat('%B %d, %Y')(eventData.dateObj);
+      document.getElementById('panelTitle').textContent = eventData.title;
+      document.getElementById('panelDescription').textContent = eventData.description;
 
+      // Tags
       const tagsEl = document.getElementById('panelTags');
-      tagsEl.innerHTML = event.tags.map(tag => `<span class="panel-tag">#${tag}</span>`).join('');
+      tagsEl.innerHTML = eventData.tags.map(tag => `<span class="panel-tag">#${tag}</span>`).join('');
 
-      document.getElementById('panelLink').href = event.source;
+      // Connections
+      const connSection = document.getElementById('panelConnectionsSection');
+      const connEl = document.getElementById('panelConnections');
+
+      // Gather all connections (outgoing and incoming)
+      const allConnections = [];
+      if (eventData.connections) {
+        eventData.connections.forEach(c => {
+          const target = eventMap.get(c.to);
+          if (target) {
+            allConnections.push({ event: target, type: c.type, label: c.label, direction: 'outgoing' });
+          }
+        });
+      }
+      // Incoming connections
+      events.forEach(e => {
+        if (e.connections) {
+          e.connections.forEach(c => {
+            if (c.to === eventData.id) {
+              allConnections.push({ event: e, type: c.type, label: c.label, direction: 'incoming' });
+            }
+          });
+        }
+      });
+
+      if (allConnections.length > 0) {
+        connSection.style.display = 'block';
+        connEl.innerHTML = allConnections.map(c => `
+          <div class="panel-conn-item" data-event-id="${c.event.id}">
+            <div class="panel-conn-dot ${c.type}"></div>
+            <div class="panel-conn-info">
+              <div class="panel-conn-title">${c.event.title}</div>
+              <div class="panel-conn-type">${c.label} (${c.type})</div>
+            </div>
+          </div>
+        `).join('');
+
+        // Add click handlers to connection items
+        connEl.querySelectorAll('.panel-conn-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const id = item.getAttribute('data-event-id');
+            const target = eventMap.get(id);
+            if (target) openDetailPanel(target);
+          });
+        });
+      } else {
+        connSection.style.display = 'none';
+      }
+
+      document.getElementById('panelLink').href = eventData.source;
 
       detailPanel.classList.add('open');
     }
@@ -1149,20 +1775,32 @@
       if (e.key === 'Escape') closeDetailPanel();
     });
 
-    // Click outside to close
     svg.on('click', () => {
       closeDetailPanel();
+    });
+
+    // ============================================
+    // FILTER HANDLING
+    // ============================================
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-filter');
+        renderConnections(currentTransform);
+      });
     });
 
     // ============================================
     // ZOOM & PAN
     // ============================================
     const zoom = d3.zoom()
-      .scaleExtent([0.5, 15])
+      .scaleExtent([0.5, 12])
       .translateExtent([[-100, 0], [width + 100, height]])
       .on('zoom', (event) => {
         currentTransform = event.transform;
         renderAxis(currentTransform);
+        renderConnections(currentTransform);
         renderDots(currentTransform);
       });
 
@@ -1182,6 +1820,7 @@
     function init() {
       initSVG();
       renderAxis(d3.zoomIdentity);
+      renderConnections(d3.zoomIdentity);
       renderDots(d3.zoomIdentity);
     }
 
@@ -1196,7 +1835,7 @@
       }, 250);
     });
 
-    // Hide instructions after first interaction
+    // Hide instructions after interaction
     svg.on('mousedown.instructions', () => {
       instructionsEl.classList.add('hidden');
     });
