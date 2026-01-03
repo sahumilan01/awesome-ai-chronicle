@@ -487,8 +487,16 @@
 
     .category-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
+    }
+
+    /* Center the 5th card on desktop */
+    @media (min-width: 1025px) {
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
 
     .category-card {
@@ -818,6 +826,13 @@
       .category-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      /* Center the 5th card */
+      .category-card:nth-child(5) {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        justify-self: center;
+      }
     }
 
     /* ========================================
@@ -1044,7 +1059,7 @@
   <section class="categories" id="explore">
     <div class="section-header reveal">
       <p class="section-label">Browse by Topic</p>
-      <h2 class="section-title">Four Pillars of Progress</h2>
+      <h2 class="section-title">Five Pillars of Progress</h2>
     </div>
     <div class="category-grid">
       <a href="docs.html#/categories/models-research" class="category-card reveal reveal-stagger" style="--stagger-index: 0" data-tilt>
@@ -1098,6 +1113,22 @@
           </div>
           <h3 class="category-name">Industry & Business</h3>
           <p class="category-desc">Funding rounds, acquisitions, policy developments, and the business of artificial intelligence.</p>
+        </div>
+      </a>
+      <a href="docs.html#/benchmarks/agi-benchmarks" class="category-card reveal reveal-stagger" style="--stagger-index: 4" data-tilt>
+        <div class="category-card-inner">
+          <div class="category-icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 28L12 20L20 26L28 14L36 20" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="20" r="3" fill="currentColor"/>
+              <circle cx="20" cy="26" r="3" fill="currentColor"/>
+              <circle cx="28" cy="14" r="3" fill="currentColor"/>
+              <path d="M4 34H36" opacity="0.4"/>
+              <path d="M4 8V34" opacity="0.4"/>
+            </svg>
+          </div>
+          <h3 class="category-name">AGI Benchmarks</h3>
+          <p class="category-desc">Tests measuring progress toward AGI—reasoning, abstraction, coding, and frontier capabilities.</p>
         </div>
       </a>
     </div>

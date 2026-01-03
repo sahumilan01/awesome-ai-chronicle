@@ -7,6 +7,9 @@
   * [Products & Applications](categories/products-applications.md)
   * [Industry & Business](categories/industry-business.md)
 
+* **Benchmarks**
+  * [AGI Benchmarks](benchmarks/agi-benchmarks.md)
+
 * **2025 Digests**
   * [2025 Overview](digests/2025/README.md)
   * [Growth Visualization](digests/2025/growth-visualization.html)
