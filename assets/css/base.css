@@ -1,0 +1,342 @@
+/**
+ * AI Chronicle Design System - Base Styles
+ * Reset, typography, and foundational elements
+ */
+
+/* === CSS RESET === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-normal);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* Remove default list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reset form elements */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Reset media elements */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Reset table */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* === TYPOGRAPHY === */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-semibold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-bold);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+}
+
+h3 {
+  font-size: var(--text-3xl);
+}
+
+h4 {
+  font-size: var(--text-2xl);
+}
+
+h5 {
+  font-size: var(--text-xl);
+}
+
+h6 {
+  font-size: var(--text-lg);
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links */
+a {
+  color: var(--color-accent);
+  transition: color var(--duration-150) var(--ease-out);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Strong / Bold */
+strong, b {
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+/* Emphasis / Italic */
+em, i {
+  font-style: italic;
+}
+
+/* Small text */
+small {
+  font-size: var(--text-sm);
+}
+
+/* Code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: var(--space-4);
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+/* Blockquote */
+blockquote {
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--color-accent);
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-8) 0;
+}
+
+/* Lists with default styling */
+.prose ul,
+.prose ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+/* === LAYOUT UTILITIES === */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+.container-sm {
+  max-width: var(--max-width-md);
+}
+
+.container-prose {
+  max-width: var(--max-width-prose);
+}
+
+.container-lg {
+  max-width: var(--max-width-lg);
+}
+
+.container-2xl {
+  max-width: var(--max-width-2xl);
+}
+
+/* === SECTIONS === */
+
+section {
+  padding: var(--space-16) 0;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: var(--space-24) 0;
+  }
+}
+
+/* === SELECTION === */
+
+::selection {
+  background: var(--color-accent-muted);
+  color: var(--color-text);
+}
+
+/* === FOCUS STYLES === */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* === SCROLLBAR (Webkit) === */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-emphasis);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* === REDUCED MOTION === */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === VISUALLY HIDDEN (Accessibility) === */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === SKIP LINK === */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-accent);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  z-index: calc(var(--z-nav) + 1);
+  transition: top var(--duration-200) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 0;
+}
