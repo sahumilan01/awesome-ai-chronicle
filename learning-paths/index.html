@@ -1,234 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning Paths | AI Chronicle</title>
   <meta name="description" content="Guided journeys through AI history. Understand how breakthroughs connect and why they matter.">
+  <meta name="theme-color" content="#0a0a0b">
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="../assets/css/design-tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/nav.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ========================================
-       CSS Custom Properties - Adaptive Theme
+       Learning Paths-Specific Styles
        ======================================== */
-    :root {
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body: 'Source Serif 4', Georgia, serif;
-      --font-mono: 'Space Mono', monospace;
 
-      --space-xs: 0.25rem;
-      --space-sm: 0.5rem;
-      --space-md: 1rem;
-      --space-lg: 2rem;
-      --space-xl: 4rem;
-      --space-2xl: 6rem;
-      --space-3xl: 8rem;
-
-      --transition-fast: 150ms ease;
-      --transition-base: 300ms ease;
-      --transition-slow: 500ms ease;
-    }
-
-    [data-theme="dark"] {
-      --bg-primary: #0a0a0a;
-      --bg-secondary: #141414;
-      --bg-tertiary: #1a1a1a;
-      --bg-card: #1f1f1f;
-
-      --text-primary: #fafafa;
-      --text-secondary: #a3a3a3;
-      --text-tertiary: #737373;
-      --text-muted: #525252;
-
-      --accent-primary: #3b82f6;
-      --accent-secondary: #60a5fa;
-      --accent-glow: rgba(59, 130, 246, 0.3);
-
-      --accent-reasoning: #f59e0b;
-      --accent-opensource: #10b981;
-      --accent-agents: #8b5cf6;
-      --accent-infra: #ef4444;
-
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --border-default: rgba(255, 255, 255, 0.1);
-      --border-strong: rgba(255, 255, 255, 0.2);
-
-      --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
-    }
-
-    [data-theme="light"] {
-      --bg-primary: #fafafa;
-      --bg-secondary: #f5f5f5;
-      --bg-tertiary: #ebebeb;
-      --bg-card: #ffffff;
-
-      --text-primary: #0a0a0a;
-      --text-secondary: #525252;
-      --text-tertiary: #737373;
-      --text-muted: #a3a3a3;
-
-      --accent-primary: #2563eb;
-      --accent-secondary: #3b82f6;
-      --accent-glow: rgba(37, 99, 235, 0.15);
-
-      --accent-reasoning: #d97706;
-      --accent-opensource: #059669;
-      --accent-agents: #7c3aed;
-      --accent-infra: #dc2626;
-
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border-default: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.15);
-
-      --gradient-hero: linear-gradient(135deg, #fafafa 0%, #e8f0fe 50%, #fafafa 100%);
-
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.1);
-    }
-
-    /* ========================================
-       Base Styles
-       ======================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--text-primary);
-      background: var(--bg-primary);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    ::selection {
-      background: var(--accent-primary);
-      color: white;
-    }
-
-    a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      transition: color var(--transition-fast);
-    }
-
-    a:hover {
-      color: var(--accent-secondary);
-    }
-
-    /* ========================================
-       Navigation
-       ======================================== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: var(--space-md) var(--space-lg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: transparent;
-      transition: background var(--transition-base), backdrop-filter var(--transition-base);
-    }
-
-    .nav.scrolled {
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    [data-theme="light"] .nav.scrolled {
-      background: rgba(250, 250, 250, 0.8);
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--space-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-secondary);
-      transition: color var(--transition-fast);
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-link.active {
-      color: var(--accent-primary);
-    }
-
-    .theme-toggle {
-      background: transparent;
-      border: 1px solid var(--border-default);
-      color: var(--text-secondary);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition-fast);
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--border-strong);
-      color: var(--text-primary);
-    }
-
-    .theme-toggle svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* ========================================
-       Hero Section
-       ======================================== */
+    /* Hero Section */
     .hero {
-      min-height: 70vh;
+      min-height: 60vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: var(--space-3xl) var(--space-lg);
-      background: var(--gradient-hero);
+      padding: var(--space-20) var(--space-4) var(--space-12);
       position: relative;
       overflow: hidden;
     }
@@ -238,38 +41,38 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-glow), transparent),
-        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(16, 185, 129, 0.1), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139, 92, 246, 0.1), transparent);
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(99, 91, 255, 0.1), transparent),
+        radial-gradient(ellipse 60% 40% at 20% 100%, rgba(16, 185, 129, 0.08), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139, 92, 246, 0.08), transparent);
       pointer-events: none;
     }
 
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 800px;
+      max-width: 700px;
     }
 
     .hero-badge {
-      font-family: var(--font-mono);
       font-size: 0.7rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent-primary);
-      background: var(--accent-glow);
-      padding: var(--space-sm) var(--space-md);
-      border-radius: 100px;
-      margin-bottom: var(--space-lg);
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      background: rgba(99, 91, 255, 0.12);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
       display: inline-flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-2);
     }
 
     .hero-badge::before {
       content: '';
       width: 6px;
       height: 6px;
-      background: var(--accent-primary);
+      background: var(--color-accent);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
@@ -280,33 +83,29 @@
     }
 
     .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 400;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 700;
       line-height: 1.1;
-      letter-spacing: -0.04em;
-      margin-bottom: var(--space-lg);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-6);
     }
 
     .hero-title em {
       font-style: italic;
-      color: var(--accent-primary);
+      color: var(--color-accent);
     }
 
     .hero-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      color: var(--text-secondary);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--color-text-secondary);
       max-width: 55ch;
       margin: 0 auto;
+      line-height: 1.7;
     }
 
-    /* ========================================
-       What You'll Learn Section
-       ======================================== */
+    /* Intro Grid */
     .intro {
-      padding: var(--space-2xl) var(--space-lg);
+      padding: var(--space-16) var(--space-4);
       max-width: 900px;
       margin: 0 auto;
     }
@@ -314,80 +113,74 @@
     .intro-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
+      gap: var(--space-8);
     }
 
     .intro-item {
       text-align: center;
-      padding: var(--space-lg);
+      padding: var(--space-6);
     }
 
     .intro-icon {
       font-size: 2.5rem;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-4);
     }
 
     .intro-title {
-      font-family: var(--font-display);
       font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: var(--space-sm);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
     }
 
     .intro-text {
       font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       line-height: 1.6;
     }
 
-    /* ========================================
-       Learning Paths Grid
-       ======================================== */
+    /* Paths Section */
     .paths-section {
-      padding: var(--space-2xl) var(--space-lg);
-      background: var(--bg-secondary);
+      padding: var(--space-16) var(--space-4);
+      background: var(--color-bg-elevated);
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: var(--space-2xl);
+      margin-bottom: var(--space-12);
     }
 
     .section-eyebrow {
-      font-family: var(--font-mono);
       font-size: 0.7rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--accent-primary);
-      margin-bottom: var(--space-md);
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
     }
 
     .section-title {
-      font-family: var(--font-display);
       font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 400;
-      letter-spacing: -0.03em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .paths-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-lg);
+      gap: var(--space-6);
     }
 
-    /* ========================================
-       Path Card
-       ======================================== */
+    /* Path Card */
     .path-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: var(--space-xl);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
       position: relative;
       overflow: hidden;
       transition: all var(--transition-base);
@@ -407,21 +200,21 @@
     }
 
     .path-card:hover {
-      border-color: var(--border-default);
+      border-color: var(--color-border-strong);
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
 
-    .path-card.reasoning { --path-color: var(--accent-reasoning); }
-    .path-card.opensource { --path-color: var(--accent-opensource); }
-    .path-card.agents { --path-color: var(--accent-agents); }
-    .path-card.infra { --path-color: var(--accent-infra); }
+    .path-card.reasoning { --path-color: var(--color-path-reasoning); }
+    .path-card.opensource { --path-color: var(--color-path-opensource); }
+    .path-card.agents { --path-color: var(--color-path-agents); }
+    .path-card.infra { --path-color: #ef4444; }
 
     .path-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-4);
     }
 
     .path-icon {
@@ -433,44 +226,41 @@
     }
 
     .path-duration {
-      font-family: var(--font-mono);
       font-size: 0.7rem;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
     }
 
     .path-events {
-      font-family: var(--font-mono);
       font-size: 0.7rem;
-      color: var(--text-muted);
+      color: var(--color-text-muted);
     }
 
     .path-title {
-      font-family: var(--font-display);
-      font-size: 1.75rem;
-      font-weight: 500;
+      font-size: 1.5rem;
+      font-weight: 600;
       line-height: 1.2;
-      margin-bottom: var(--space-sm);
+      margin-bottom: var(--space-2);
       letter-spacing: -0.02em;
     }
 
     .path-subtitle {
-      font-family: var(--font-body);
       font-size: 0.95rem;
-      color: var(--text-secondary);
-      margin-bottom: var(--space-lg);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-6);
       line-height: 1.6;
     }
 
     /* Path Timeline Preview */
     .path-timeline {
       display: flex;
-      gap: var(--space-xs);
-      margin-bottom: var(--space-lg);
-      padding: var(--space-md) 0;
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
       overflow-x: auto;
     }
 
@@ -479,19 +269,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-xs);
-      padding: var(--space-sm) var(--space-md);
-      background: var(--bg-tertiary);
-      border-radius: 8px;
-      min-width: 100px;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-bg-elevated);
+      border-radius: var(--radius-md);
+      min-width: 90px;
     }
 
     .milestone-date {
-      font-family: var(--font-mono);
       font-size: 0.6rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
     }
 
     .milestone-dot {
@@ -502,8 +292,8 @@
     }
 
     .milestone-title {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
+      font-size: 0.7rem;
+      color: var(--color-text-secondary);
       text-align: center;
       line-height: 1.3;
     }
@@ -518,34 +308,34 @@
     .path-topics {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-xs);
+      gap: var(--space-1);
     }
 
     .path-topic {
-      font-family: var(--font-mono);
       font-size: 0.6rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
       color: var(--path-color);
       background: color-mix(in srgb, var(--path-color) 15%, transparent);
       padding: 4px 8px;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
     }
 
     .path-cta {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-xs);
-      font-family: var(--font-mono);
+      gap: var(--space-2);
       font-size: 0.75rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.05em;
       color: var(--path-color);
       transition: gap var(--transition-fast);
     }
 
     .path-card:hover .path-cta {
-      gap: var(--space-sm);
+      gap: var(--space-3);
     }
 
     .path-cta svg {
@@ -567,80 +357,77 @@
     .path-card.coming-soon::after {
       content: 'Coming Soon';
       position: absolute;
-      top: var(--space-lg);
-      right: var(--space-lg);
-      font-family: var(--font-mono);
+      top: var(--space-6);
+      right: var(--space-6);
       font-size: 0.65rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      background: var(--bg-tertiary);
-      padding: var(--space-xs) var(--space-sm);
-      border-radius: 4px;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      background: var(--color-bg-subtle);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
     }
 
-    /* ========================================
-       Why Learning Paths Section
-       ======================================== */
+    /* Why Section */
     .why-section {
-      padding: var(--space-2xl) var(--space-lg);
+      padding: var(--space-16) var(--space-4);
     }
 
     .why-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-2xl);
+      gap: var(--space-12);
       align-items: center;
       max-width: 1000px;
       margin: 0 auto;
     }
 
     .why-content h2 {
-      font-family: var(--font-display);
       font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: var(--space-md);
+      font-weight: 700;
+      margin-bottom: var(--space-4);
     }
 
     .why-content p {
-      color: var(--text-secondary);
-      margin-bottom: var(--space-md);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
       line-height: 1.7;
     }
 
     .why-list {
       list-style: none;
       padding: 0;
-      margin: var(--space-lg) 0 0 0;
+      margin: var(--space-6) 0 0 0;
     }
 
     .why-list li {
       position: relative;
-      padding-left: var(--space-lg);
-      margin-bottom: var(--space-md);
-      color: var(--text-secondary);
+      padding-left: var(--space-6);
+      margin-bottom: var(--space-3);
+      color: var(--color-text-secondary);
     }
 
     .why-list li::before {
       content: '→';
       position: absolute;
       left: 0;
-      color: var(--accent-primary);
+      color: var(--color-accent);
     }
 
     .why-visual {
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
+      gap: var(--space-4);
     }
 
     .why-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: var(--space-lg);
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
       display: flex;
-      gap: var(--space-md);
+      gap: var(--space-4);
       align-items: flex-start;
     }
 
@@ -650,25 +437,22 @@
     }
 
     .why-card-content h3 {
-      font-family: var(--font-display);
       font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: var(--space-xs);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
     }
 
     .why-card-content p {
       font-size: 0.85rem;
-      color: var(--text-tertiary);
+      color: var(--color-text-muted);
       line-height: 1.5;
       margin: 0;
     }
 
-    /* ========================================
-       Footer
-       ======================================== */
+    /* Footer */
     .footer {
-      padding: var(--space-2xl) 0;
-      border-top: 1px solid var(--border-subtle);
+      padding: var(--space-12) 0;
+      border-top: 1px solid var(--color-border);
       text-align: center;
     }
 
@@ -676,42 +460,39 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-md);
+      gap: var(--space-4);
     }
 
     .footer-logo {
-      font-family: var(--font-display);
       font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--text-primary);
+      font-weight: 700;
+      color: var(--color-text);
     }
 
     .footer-links {
       display: flex;
-      gap: var(--space-lg);
+      gap: var(--space-6);
     }
 
     .footer-link {
-      font-family: var(--font-mono);
       font-size: 0.75rem;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
     }
 
     .footer-link:hover {
-      color: var(--text-primary);
+      color: var(--color-text);
     }
 
     .footer-copyright {
       font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: var(--space-md);
+      color: var(--color-text-muted);
+      margin-top: var(--space-4);
     }
 
-    /* ========================================
-       Responsive
-       ======================================== */
+    /* Responsive */
     @media (max-width: 1024px) {
       .paths-grid {
         grid-template-columns: 1fr;
@@ -719,13 +500,9 @@
     }
 
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
       .intro-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-md);
+        gap: var(--space-4);
       }
 
       .why-grid {
@@ -737,23 +514,21 @@
       }
 
       .path-timeline {
-        gap: var(--space-sm);
+        gap: var(--space-2);
       }
 
       .path-milestone {
         min-width: 80px;
-        padding: var(--space-xs) var(--space-sm);
+        padding: var(--space-1) var(--space-2);
       }
 
       .footer-links {
         flex-direction: column;
-        gap: var(--space-md);
+        gap: var(--space-3);
       }
     }
 
-    /* ========================================
-       Animations
-       ======================================== */
+    /* Animation */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -771,18 +546,36 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <a href="../index.html" class="nav-logo">AI Chronicle</a>
-    <div class="nav-links">
-      <a href="../timeline.html" class="nav-link">Timeline</a>
-      <a href="../docs.html" class="nav-link">Documentation</a>
-      <a href="#" class="nav-link active">Learning Paths</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
+  <!-- Global Navigation -->
+  <nav class="global-nav" role="navigation" aria-label="Main navigation">
+    <div class="global-nav-inner">
+      <a href="../index.html" class="nav-logo">AI Chronicle</a>
+      <div class="nav-links">
+        <a href="../timeline.html" class="nav-link">Timeline</a>
+        <a href="index.html" class="nav-link active">Learn</a>
+        <a href="../docs.html" class="nav-link">Docs</a>
+        <a href="../digests/2025/README.md" class="nav-link">Digests</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+          <svg class="theme-icon-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="theme-icon-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <a href="https://github.com/anthropics/awesome-ai-chronicle" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+      <button class="nav-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </nav>
@@ -1093,52 +886,11 @@
     </div>
   </footer>
 
+  <!-- Shared Scripts -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/nav.js"></script>
+
   <script>
-    // Navigation scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-
-    function getPreferredTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      updateThemeIcon(theme);
-    }
-
-    function updateThemeIcon(theme) {
-      const icon = themeToggle.querySelector('svg');
-      if (theme === 'light') {
-        icon.innerHTML = `<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>`;
-      } else {
-        icon.innerHTML = `
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        `;
-      }
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Initialize theme
-    setTheme(getPreferredTheme());
-
     // Animate cards on scroll
     const observerOptions = {
       threshold: 0.1,

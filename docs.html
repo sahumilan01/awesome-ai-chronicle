@@ -7,28 +7,126 @@
   <meta name="description" content="A curated timeline of AI developments">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --theme-color: #7c3aed;
+      --theme-color: #635bff;
+      --base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+
+    body {
+      font-family: var(--base-font-family);
+    }
+
+    .sidebar {
+      font-family: var(--base-font-family);
+    }
+
     .sidebar-nav > ul > li > a {
       font-weight: 600;
     }
+
+    .markdown-section {
+      max-width: 800px;
+    }
+
+    .markdown-section h1 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .markdown-section h2 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+
     .markdown-section h3 {
       margin-top: 2rem;
+      font-weight: 600;
     }
+
     /* Significance level styling */
     .markdown-section h3:has(code) {
       border-left: 3px solid var(--theme-color);
       padding-left: 10px;
     }
+
+    /* Code styling */
+    .markdown-section code {
+      border-radius: 4px;
+      font-size: 0.875em;
+    }
+
+    /* Links */
+    .markdown-section a {
+      color: var(--theme-color);
+    }
+
+    .markdown-section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Blockquotes */
+    .markdown-section blockquote {
+      border-left-color: var(--theme-color);
+      background: rgba(99, 91, 255, 0.05);
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Tables */
+    .markdown-section table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .markdown-section th {
+      background: #f7f7f8;
+      font-weight: 600;
+    }
+
+    .markdown-section th,
+    .markdown-section td {
+      padding: 0.75rem;
+      border: 1px solid #e5e5e8;
+    }
+
+    /* Back to main site link */
+    .app-nav {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .app-nav a {
+      padding: 8px 16px;
+      background: var(--theme-color);
+      color: white !important;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .app-nav a:hover {
+      background: #7a73ff;
+    }
   </style>
 </head>
 <body>
+  <nav class="app-nav">
+    <a href="/">Back to Home</a>
+  </nav>
   <div id="app">Loading...</div>
   <script>
     window.$docsify = {
-      name: 'Awesome AI Chronicle',
+      name: 'AI Chronicle',
       repo: 'sahumilan01/awesome-ai-chronicle',
       loadSidebar: true,
       subMaxLevel: 2,
@@ -39,7 +137,7 @@
       },
       auto2top: true,
       homepage: 'README.md',
-      themeColor: '#7c3aed',
+      themeColor: '#635bff',
       pagination: {
         previousText: 'Previous',
         nextText: 'Next',
