@@ -1,6 +1,12 @@
 * [Home](/)
 * [Visual Timeline](timeline.html ':target=_blank')
+* [Learning Paths](learning-paths/index.html ':target=_blank')
 * [Contributing](CONTRIBUTING.md)
+
+* **Learning Paths**
+  * [The Reasoning Revolution](learning-paths/reasoning-revolution.html ':target=_blank')
+  * [Open Source AI](learning-paths/open-source-ai.html ':target=_blank')
+  * [Rise of AI Agents](learning-paths/ai-agents.html ':target=_blank')
 
 * **Deep Dives**
   * [Models & Research](deep-dives/models-research.html ':target=_blank')

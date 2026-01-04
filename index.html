@@ -594,6 +594,139 @@
     }
 
     /* ========================================
+       LEARNING PATHS SECTION
+       ======================================== */
+    .learning-paths {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .learning-paths-intro {
+      text-align: center;
+      max-width: 500px;
+      margin: -1rem auto 2rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .learning-paths-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .learning-paths-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .learning-paths-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1.25rem;
+      }
+    }
+
+    .learning-path-card {
+      position: relative;
+      padding: 1.75rem;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition:
+        border-color var(--duration-normal) var(--ease-smooth),
+        box-shadow var(--duration-normal) var(--ease-smooth),
+        transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .learning-path-card:hover {
+      border-color: transparent;
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .learning-path-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .learning-path-accent.reasoning { background: #f59e0b; }
+    .learning-path-accent.opensource { background: #10b981; }
+    .learning-path-accent.agents { background: #8b5cf6; }
+
+    .learning-path-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .learning-path-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .learning-path-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .learning-path-meta {
+      font-size: 0.75rem;
+      color: var(--muted-light);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule-light);
+    }
+
+    .learning-paths-cta {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .btn-view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      text-decoration: none;
+      transition:
+        background var(--duration-fast) var(--ease-smooth),
+        color var(--duration-fast) var(--ease-smooth);
+    }
+
+    .btn-view-all:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-view-all svg {
+      transition: transform var(--duration-normal) var(--ease-spring);
+    }
+
+    .btn-view-all:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ========================================
        DEEP DIVES SECTION
        ======================================== */
     .deep-dives {
@@ -1336,6 +1469,50 @@
           <h3 class="category-name">Open-Source Ecosystem</h3>
           <p class="category-desc">Llama, Qwen, DeepSeek, Mistral—the open models, tools, and Hugging Face infrastructure democratizing AI.</p>
         </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"><hr class="divider-line"></div>
+
+  <!-- Learning Paths Section -->
+  <section class="learning-paths" id="learning-paths">
+    <div class="section-header reveal">
+      <p class="section-label">Guided Learning</p>
+      <h2 class="section-title">Learning Paths</h2>
+    </div>
+    <div class="learning-paths-intro reveal">
+      <p>Curated journeys through AI history. Understand how breakthroughs connect and why they matter.</p>
+    </div>
+    <div class="learning-paths-grid">
+      <a href="learning-paths/reasoning-revolution.html" class="learning-path-card reveal" target="_blank">
+        <div class="learning-path-accent reasoning"></div>
+        <div class="learning-path-icon">🧠</div>
+        <h3 class="learning-path-title">The Reasoning Revolution</h3>
+        <p class="learning-path-desc">From o1 to IMO gold. How chain-of-thought changed what AI can do.</p>
+        <span class="learning-path-meta">~20 min · 12 events</span>
+      </a>
+      <a href="learning-paths/open-source-ai.html" class="learning-path-card reveal" target="_blank">
+        <div class="learning-path-accent opensource"></div>
+        <div class="learning-path-icon">🌐</div>
+        <h3 class="learning-path-title">Open Source AI</h3>
+        <p class="learning-path-desc">Llama, DeepSeek, Mistral. The democratization of frontier models.</p>
+        <span class="learning-path-meta">~25 min · 15 events</span>
+      </a>
+      <a href="learning-paths/ai-agents.html" class="learning-path-card reveal" target="_blank">
+        <div class="learning-path-accent agents"></div>
+        <div class="learning-path-icon">🤖</div>
+        <h3 class="learning-path-title">Rise of AI Agents</h3>
+        <p class="learning-path-desc">From chatbots to autonomous workers. Computer use, MCP, and beyond.</p>
+        <span class="learning-path-meta">~18 min · 10 events</span>
+      </a>
+    </div>
+    <div class="learning-paths-cta reveal">
+      <a href="learning-paths/index.html" class="btn-view-all" target="_blank">
+        View All Paths
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </a>
     </div>
   </section>
