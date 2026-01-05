@@ -1,1100 +1,894 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rise of AI Agents | AI Chronicle Learning Paths</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0c0a14;
-            --bg-secondary: #14111f;
-            --bg-card: #1a1625;
-            --bg-elevated: #221d30;
-            --text-primary: #f5f3ff;
-            --text-secondary: #a5a0b8;
-            --text-muted: #6b6580;
-            --accent-path: #8b5cf6;
-            --accent-secondary: #c084fc;
-            --accent-glow: rgba(139, 92, 246, 0.3);
-            --border-subtle: rgba(139, 92, 246, 0.15);
-            --border-active: rgba(139, 92, 246, 0.4);
-            --gradient-path: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #a855f7 100%);
-            --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.15);
-        }
-
-        [data-theme="light"] {
-            --bg-primary: #faf8ff;
-            --bg-secondary: #f3f0fa;
-            --bg-card: #ffffff;
-            --bg-elevated: #f8f5ff;
-            --text-primary: #1a1625;
-            --text-secondary: #5c5470;
-            --text-muted: #8b839e;
-            --border-subtle: rgba(139, 92, 246, 0.2);
-            --border-active: rgba(139, 92, 246, 0.5);
-            --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--gradient-path);
-            z-index: 1000;
-            transition: width 0.1s ease;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(12, 10, 20, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-subtle);
-            z-index: 100;
-            padding: 0.75rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        [data-theme="light"] .nav {
-            background: rgba(250, 248, 255, 0.9);
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .nav-brand svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--accent-path);
-        }
-
-        .nav-brand span {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .theme-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--border-active);
-        }
-
-        .theme-toggle svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--text-secondary);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 8rem 2rem 4rem;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-subtle);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, var(--accent-glow), transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .path-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 100px;
-            padding: 0.4rem 1rem;
-            font-size: 0.85rem;
-            color: var(--accent-path);
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .path-badge svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: var(--gradient-path);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .meta-item svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--text-muted);
-        }
-
-        /* Main Content */
-        .main-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        /* Introduction */
-        .intro {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            margin-bottom: 4rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .intro p {
-            margin-bottom: 1.5rem;
-        }
-
-        .intro p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Section Headers */
-        .section-header {
-            margin-bottom: 2rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-        }
-
-        /* Milestone Cards */
-        .milestone {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .milestone::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--gradient-path);
-        }
-
-        .milestone-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .milestone-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent-path);
-            background: var(--bg-elevated);
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            white-space: nowrap;
-        }
-
-        .milestone h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .milestone-content {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .milestone-content p {
-            margin-bottom: 1rem;
-        }
-
-        .milestone-content p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* So What Box */
-        .so-what {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .so-what-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            color: var(--accent-path);
-            margin-bottom: 0.75rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .so-what-header svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .so-what ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .so-what li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .so-what li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0.6em;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-path);
-            border-radius: 50%;
-        }
-
-        .so-what li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Evolution Table */
-        .evolution-section {
-            margin: 4rem 0;
-            padding: 3rem 0;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .evolution-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .evolution-table th,
-        .evolution-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .evolution-table th {
-            font-weight: 600;
-            color: var(--accent-path);
-            background: var(--bg-card);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .evolution-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .evolution-table td {
-            color: var(--text-secondary);
-        }
-
-        .evolution-table td:first-child {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .capability-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .capability-badge.limited {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-        }
-
-        .capability-badge.partial {
-            background: rgba(245, 158, 11, 0.15);
-            color: #fbbf24;
-        }
-
-        .capability-badge.full {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-        }
-
-        /* Timeline */
-        .timeline-section {
-            margin: 4rem 0;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border-subtle);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-        }
-
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 0.4rem;
-            width: 12px;
-            height: 12px;
-            background: var(--bg-primary);
-            border: 2px solid var(--accent-path);
-            border-radius: 50%;
-        }
-
-        .timeline-item.breakthrough::before {
-            background: var(--accent-path);
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        .timeline-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Key Takeaways */
-        .takeaways {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin: 4rem 0;
-        }
-
-        .takeaways h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .takeaway-list {
-            list-style: none;
-        }
-
-        .takeaway-list li {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .takeaway-list li:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .takeaway-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-path);
-            min-width: 2rem;
-        }
-
-        .takeaway-content h4 {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .takeaway-content p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Next Path */
-        .next-path {
-            margin: 4rem 0;
-            padding: 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .next-path:hover {
-            border-color: var(--border-active);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .next-path-content {
-            flex: 1;
-        }
-
-        .next-path-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .next-path-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .next-path svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--accent-path);
-        }
-
-        /* Back Link */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-            transition: color 0.2s ease;
-        }
-
-        .back-link:hover {
-            color: var(--accent-path);
-        }
-
-        .back-link svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 6rem 1.5rem 3rem;
-            }
-
-            .main-content {
-                padding: 3rem 1.5rem;
-            }
-
-            .milestone {
-                padding: 1.5rem;
-            }
-
-            .milestone-header {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .hero-meta {
-                gap: 1rem;
-            }
-
-            .evolution-table {
-                font-size: 0.85rem;
-            }
-
-            .evolution-table th,
-            .evolution-table td {
-                padding: 0.75rem 0.5rem;
-            }
-
-            .next-path {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise of AI Agents | AI Chronicle Learning Path</title>
+  <meta name="description" content="From Auto-GPT's viral moment to ChatGPT Agent's autonomous capabilities. How AI went from chat to doing work.">
+
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="../assets/css/design-tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/nav.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent-path: #8b5cf6;
+      --accent-glow: rgba(139, 92, 246, 0.2);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    ::selection { background: var(--accent-path); color: white; }
+    a { color: var(--accent-path); }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-path), #c084fc);
+      z-index: 1001;
+      transition: width 50ms linear;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-text-muted);
+      margin-bottom: 2rem;
+    }
+    .hero-breadcrumb a { color: var(--accent-path); }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-path);
+      background: var(--accent-glow);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, var(--accent-path), #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+    }
+    .hero-meta-item { display: flex; align-items: center; gap: 0.5rem; }
+
+    /* Intro Section */
+    .intro {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+      font-size: 1.15rem;
+      color: var(--color-text-secondary);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .intro p { margin-bottom: 1.5rem; }
+    .intro p:last-child { margin-bottom: 0; }
+
+    /* Article Content */
+    .article {
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--color-text-secondary);
+    }
+
+    /* Milestone Card */
+    .milestone {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .milestone::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent-path), #c084fc);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .milestone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .milestone-date {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-path);
+      background: var(--color-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .milestone h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .milestone-content {
+      color: var(--color-text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .milestone-content p { margin-bottom: 1rem; }
+    .milestone-content p:last-child { margin-bottom: 0; }
+
+    /* So What Box */
+    .so-what {
+      background: var(--accent-glow);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .so-what-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--accent-path);
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .so-what ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .so-what li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .so-what li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-path);
+      border-radius: 50%;
+    }
+
+    .so-what li:last-child { margin-bottom: 0; }
+
+    /* Evolution Table */
+    .evolution-section {
+      margin: 4rem 0;
+      padding: 3rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .evolution-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .evolution-table th,
+    .evolution-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .evolution-table th {
+      font-weight: 600;
+      color: var(--accent-path);
+      background: var(--color-bg-elevated);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .evolution-table tr:last-child td { border-bottom: none; }
+    .evolution-table td { color: var(--color-text-secondary); }
+    .evolution-table td:first-child {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .capability-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .capability-badge.limited {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+    }
+
+    .capability-badge.partial {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+    }
+
+    .capability-badge.full {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+    }
+
+    /* Timeline Section */
+    .timeline-section { margin: 4rem 0; }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.4rem;
+      width: 12px;
+      height: 12px;
+      background: var(--color-bg);
+      border: 2px solid var(--accent-path);
+      border-radius: 50%;
+    }
+
+    .timeline-item.breakthrough::before {
+      background: var(--accent-path);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+    }
+
+    /* Key Takeaways */
+    .takeaways {
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin: 4rem 0;
+    }
+
+    .takeaways h2 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .takeaway-list { list-style: none; }
+
+    .takeaway-list li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .takeaway-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .takeaway-number {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-path);
+      min-width: 2rem;
+    }
+
+    .takeaway-content h4 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .takeaway-content p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Next Path */
+    .next-path {
+      margin: 4rem 0;
+      padding: 2rem;
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .next-path:hover {
+      border-color: var(--accent-path);
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .next-path-content { flex: 1; }
+
+    .next-path-label {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .next-path-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .next-path svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--accent-path);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+    .footer-text a { color: var(--color-text-secondary); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-meta { gap: 1rem; }
+      .milestone { padding: 1.5rem; }
+      .milestone-header { flex-direction: column; gap: 0.5rem; }
+      .evolution-table { font-size: 0.85rem; }
+      .evolution-table th,
+      .evolution-table td { padding: 0.75rem 0.5rem; }
+      .next-path { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <div class="progress-bar" id="progress"></div>
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
 
-    <nav class="nav">
-        <a href="index.html" class="nav-brand">
-            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>Learning Paths</span>
+  <!-- Global Navigation -->
+  <nav class="global-nav" id="globalNav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">AI Chronicle</a>
+      <div class="nav-links">
+        <a href="../timeline.html" class="nav-link">Timeline</a>
+        <a href="index.html" class="nav-link">Learn</a>
+        <a href="../docs.html#/digests/2025/README" class="nav-link">Digests</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+        <a href="https://github.com/anthropics/awesome-ai-chronicle" class="nav-github" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
         </a>
-        <div class="nav-actions">
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-            </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-breadcrumb">
+      <a href="index.html">Learning Paths</a> / Rise of AI Agents
+    </div>
+    <div class="hero-badge">
+      <span>&#128187;</span>
+      Learning Path
+    </div>
+    <h1 class="hero-title">Rise of AI Agents</h1>
+    <p class="hero-subtitle">
+      From Auto-GPT's viral moment to ChatGPT Agent's autonomous capabilities.
+      How AI went from chat to doing work.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span>&#128214;</span>
+        <span>~25 min read</span>
+      </div>
+      <div class="hero-meta-item">
+        <span>&#128197;</span>
+        <span>Apr 2023 - Dec 2025</span>
+      </div>
+      <div class="hero-meta-item">
+        <span>&#128203;</span>
+        <span>12 key events</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="intro">
+    <p>In April 2023, <strong>Auto-GPT went viral</strong>. The idea was simple but revolutionary: what if an AI could break down tasks, execute them autonomously, and iterate on its own work? It captured the imagination of the tech world, even if the reality was often a loop of confused API calls.</p>
+    <p>Fast forward to 2025, and that vision became reality. <strong>AI agents can now browse the web, write and run code, create documents, and complete multi-step workflows</strong>-all without human intervention for each step. The gap between "chat" and "do" finally closed.</p>
+    <p>This path traces the agent revolution: from experimental frameworks to production-ready systems that are reshaping how we work with AI.</p>
+  </section>
+
+  <!-- Article Content -->
+  <article class="article">
+    <div class="section-header">
+      <h2>Key Milestones</h2>
+      <p>The breakthroughs that made autonomous AI possible</p>
+    </div>
+
+    <!-- Milestone 1: Auto-GPT -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>Auto-GPT: The Vision Goes Viral</h3>
+        <span class="milestone-date">Apr 2023</span>
+      </div>
+      <div class="milestone-content">
+        <p>Auto-GPT emerged as one of the first autonomous AI agent frameworks, capturing the tech world's imagination. The concept: give GPT-4 a goal, and it would break it down into tasks, execute them, and iterate until done.</p>
+        <p>Within weeks, it became one of the fastest-growing repos on GitHub. The demo videos were mesmerizing-an AI that could research topics, write code, and navigate the web on its own. Reality was messier (infinite loops, hallucinated plans, astronomical API costs), but the vision was clear.</p>
+        <p><strong>Auto-GPT proved that people wanted AI that does, not just AI that chats.</strong> It sparked a wave of agent frameworks: BabyAGI, AgentGPT, SuperAGI. The race to build autonomous AI was on.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Established "agent" as a category distinct from "chatbot"</li>
+          <li>Revealed the gap between demo and production reliability</li>
+          <li>Created demand for better tool use, memory, and planning capabilities</li>
+          <li>Spawned the LangChain/LlamaIndex agent ecosystem</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Milestone 2: OpenAI Assistants -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>OpenAI DevDay: Assistants API & GPTs</h3>
+        <span class="milestone-date">Nov 2023</span>
+      </div>
+      <div class="milestone-content">
+        <p>At DevDay 2023, OpenAI launched two products that legitimized agents for the mainstream: the <strong>Assistants API</strong> and <strong>GPTs</strong> (custom ChatGPT versions anyone could create).</p>
+        <p>The Assistants API provided built-in retrieval, code interpreter, and function calling-the three pillars of useful agents. No more stitching together LangChain chains and hoping they worked. OpenAI handled memory, tool execution, and state management.</p>
+        <p>GPTs democratized the concept further: non-developers could create custom AI assistants with specific knowledge and capabilities. While many GPTs were trivial, the best ones showed what purpose-built agents could do.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Made agent development accessible without deep infrastructure knowledge</li>
+          <li>Code Interpreter showed the power of AI + sandboxed execution</li>
+          <li>Established patterns: tools, retrieval, memory as core agent capabilities</li>
+          <li>Proved market demand with millions of GPTs created</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Milestone 3: Computer Use -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>Claude Computer Use: AI Sees Your Screen</h3>
+        <span class="milestone-date">Oct 2024</span>
+      </div>
+      <div class="milestone-content">
+        <p>In October 2024, Anthropic released <strong>Claude Computer Use</strong>-the ability for Claude to see your screen and control your mouse and keyboard. Instead of relying on APIs and integrations, Claude could interact with any application the way a human would.</p>
+        <p>This was a paradigm shift. Previous agents needed custom integrations for each tool. Computer Use could work with legacy software, web apps with no API, or complex enterprise systems-anything with a visual interface.</p>
+        <p>The demos showed Claude filling out forms, navigating websites, and operating desktop applications. It wasn't perfect (timing issues, visual ambiguity), but it proved a new approach to agent capabilities.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Unlocked automation for any GUI-based workflow</li>
+          <li>Eliminated the "no API" blocker for many enterprise use cases</li>
+          <li>Required new thinking about security and sandboxing</li>
+          <li>Set the stage for "AI worker" rather than "AI assistant"</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Milestone 4: MCP -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>Model Context Protocol: The Agent Standard</h3>
+        <span class="milestone-date">Apr 2025</span>
+      </div>
+      <div class="milestone-content">
+        <p>Anthropic launched the <strong>Model Context Protocol (MCP)</strong> with Integrations-10 launch partners including Jira, Confluence, and Zapier. MCP created a standardized way for AI to connect to external tools and data sources.</p>
+        <p>Before MCP, every integration was custom. Building an agent that could use Google Calendar, Slack, and GitHub meant three different implementations. MCP provided a universal protocol: tools described their capabilities, and AI models used them consistently.</p>
+        <p>The protocol was open-source from day one, inviting the ecosystem to build. Within months, hundreds of MCP servers emerged for everything from databases to smart home devices.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Reduced integration development from weeks to hours</li>
+          <li>Created network effects as more tools joined</li>
+          <li>Enabled agents that span multiple services seamlessly</li>
+          <li>Established Anthropic as infrastructure leader, not just model provider</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Milestone 5: ChatGPT Agent -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>ChatGPT Agent: The Vision Realized</h3>
+        <span class="milestone-date">Jul 2025</span>
+      </div>
+      <div class="milestone-content">
+        <p>OpenAI launched <strong>ChatGPT Agent</strong> in July 2025-the culmination of everything the agent space had been building toward. A unified system capable of using its own computer, navigating websites, running code, and creating documents autonomously.</p>
+        <p>Unlike earlier iterations, ChatGPT Agent was production-ready. It could book flights by actually navigating airline websites. Fill out government forms. Research topics across multiple sources and synthesize findings. The "loop of confused API calls" problem from Auto-GPT was solved.</p>
+        <p>The same month, ChatGPT hit 700 million weekly active users. Agents weren't an experiment anymore-they were how millions interacted with AI daily.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Delivered on Auto-GPT's promise at scale</li>
+          <li>Changed user expectations: AI should complete tasks, not just assist</li>
+          <li>Created new categories of AI-native workflows</li>
+          <li>Raised the bar for all competitors</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Milestone 6: Claude Code -->
+    <div class="milestone">
+      <div class="milestone-header">
+        <h3>Claude Code: The Autonomous Developer</h3>
+        <span class="milestone-date">Nov 2025</span>
+      </div>
+      <div class="milestone-content">
+        <p>Anthropic launched <strong>Claude Code</strong> in public beta-an autonomous coding agent for large-scale software projects. While GitHub Copilot suggested lines, Claude Code could architect features, refactor codebases, and debug complex issues across multiple files.</p>
+        <p>Claude Code represented a new category: not code completion, but code autonomy. Give it a task like "implement user authentication" and it would plan the approach, create the necessary files, write tests, and iterate until everything worked.</p>
+        <p>The same month, Cursor creator Anysphere raised $2.3B at a $29.3B valuation-the largest AI coding tool funding ever. The market had spoken: autonomous coding was the future.</p>
+      </div>
+      <div class="so-what">
+        <div class="so-what-header">&#9889; So What?</div>
+        <ul>
+          <li>Elevated "AI pair programmer" to "AI team member"</li>
+          <li>Changed how developers think about task delegation</li>
+          <li>Created pressure for better code review and oversight tools</li>
+          <li>Validated the $100B+ AI coding market</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Evolution Table -->
+    <section class="evolution-section">
+      <div class="section-header">
+        <h2>Agent Capability Evolution</h2>
+        <p>How agent capabilities expanded from 2023 to 2025</p>
+      </div>
+      <table class="evolution-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>2023</th>
+            <th>2024</th>
+            <th>2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Multi-step Planning</td>
+            <td><span class="capability-badge limited">Unreliable</span></td>
+            <td><span class="capability-badge partial">Improving</span></td>
+            <td><span class="capability-badge full">Production</span></td>
+          </tr>
+          <tr>
+            <td>Tool Use</td>
+            <td><span class="capability-badge partial">Function calls</span></td>
+            <td><span class="capability-badge partial">Structured</span></td>
+            <td><span class="capability-badge full">MCP/Universal</span></td>
+          </tr>
+          <tr>
+            <td>Code Execution</td>
+            <td><span class="capability-badge limited">Sandboxed</span></td>
+            <td><span class="capability-badge partial">Interpreter</span></td>
+            <td><span class="capability-badge full">Full IDE</span></td>
+          </tr>
+          <tr>
+            <td>Web Browsing</td>
+            <td><span class="capability-badge limited">Plugin-based</span></td>
+            <td><span class="capability-badge partial">Built-in</span></td>
+            <td><span class="capability-badge full">Autonomous</span></td>
+          </tr>
+          <tr>
+            <td>Computer Control</td>
+            <td><span class="capability-badge limited">None</span></td>
+            <td><span class="capability-badge partial">Beta</span></td>
+            <td><span class="capability-badge full">Production</span></td>
+          </tr>
+          <tr>
+            <td>Memory/Context</td>
+            <td><span class="capability-badge limited">Session only</span></td>
+            <td><span class="capability-badge partial">Retrieval</span></td>
+            <td><span class="capability-badge full">Long-term</span></td>
+          </tr>
+          <tr>
+            <td>Reliability</td>
+            <td><span class="capability-badge limited">Demo only</span></td>
+            <td><span class="capability-badge partial">Dev use</span></td>
+            <td><span class="capability-badge full">Enterprise</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <div class="section-header">
+        <h2>Full Timeline</h2>
+        <p>Every milestone in the agent revolution</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Apr 13, 2023</div>
+          <div class="timeline-title">Auto-GPT Goes Viral</div>
+          <div class="timeline-desc">First popular autonomous AI agent framework captures tech world's imagination</div>
         </div>
-    </nav>
-
-    <header class="hero">
-        <div class="hero-content">
-            <div class="path-badge">
-                <svg viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                Learning Path
-            </div>
-            <h1>Rise of AI Agents</h1>
-            <p class="hero-subtitle">From Auto-GPT's viral moment to ChatGPT Agent's autonomous capabilities. How AI went from chat to doing work.</p>
-            <div class="hero-meta">
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    ~25 min read
-                </div>
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                    Apr 2023 - Dec 2025
-                </div>
-                <div class="meta-item">
-                    <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                    12 key events
-                </div>
-            </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Nov 6, 2023</div>
+          <div class="timeline-title">OpenAI Assistants API & GPTs</div>
+          <div class="timeline-desc">Built-in retrieval, code interpreter, and function calling make agents accessible</div>
         </div>
-    </header>
+        <div class="timeline-item">
+          <div class="timeline-date">Aug 22, 2024</div>
+          <div class="timeline-title">LangGraph Cloud</div>
+          <div class="timeline-desc">LangChain releases infrastructure for deploying stateful multi-agent applications</div>
+        </div>
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Oct 1, 2024</div>
+          <div class="timeline-title">OpenAI Realtime API</div>
+          <div class="timeline-desc">Low-latency multimodal voice enables conversational agents</div>
+        </div>
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Oct 22, 2024</div>
+          <div class="timeline-title">Claude Computer Use</div>
+          <div class="timeline-desc">AI can see your screen and control mouse/keyboard for any application</div>
+        </div>
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Apr 15, 2025</div>
+          <div class="timeline-title">MCP & Integrations Launch</div>
+          <div class="timeline-desc">Model Context Protocol standardizes AI-tool connections with 10 launch partners</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Apr 16, 2025</div>
+          <div class="timeline-title">OpenAI o3 & o4-mini</div>
+          <div class="timeline-desc">Next-gen reasoning models with native agentic capabilities</div>
+        </div>
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Jul 17, 2025</div>
+          <div class="timeline-title">ChatGPT Agent Launch</div>
+          <div class="timeline-desc">Unified agentic system: browse web, run code, create documents autonomously</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Jul 25, 2025</div>
+          <div class="timeline-title">ChatGPT 700M Weekly Users</div>
+          <div class="timeline-desc">Agent capabilities drive user growth to unprecedented scale</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Nov 5, 2025</div>
+          <div class="timeline-title">GitHub Copilot X</div>
+          <div class="timeline-desc">Voice coding, project-wide understanding, enhanced debugging</div>
+        </div>
+        <div class="timeline-item breakthrough">
+          <div class="timeline-date">Nov 15, 2025</div>
+          <div class="timeline-title">Claude Code Public Beta</div>
+          <div class="timeline-desc">Autonomous coding agent for large-scale software projects</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Nov 20, 2025</div>
+          <div class="timeline-title">Anysphere $2.3B Funding</div>
+          <div class="timeline-desc">Cursor creator raises at $29.3B-largest AI coding tool round ever</div>
+        </div>
+      </div>
+    </section>
 
-    <main class="main-content">
-        <a href="index.html" class="back-link">
-            <svg viewBox="0 0 24 24"><path d="M19 12H5m7-7l-7 7 7 7"/></svg>
-            Back to Learning Paths
-        </a>
+    <!-- Key Takeaways -->
+    <section class="takeaways">
+      <h2>Key Takeaways</h2>
+      <ol class="takeaway-list">
+        <li>
+          <span class="takeaway-number">1</span>
+          <div class="takeaway-content">
+            <h4>From demo to production took two years</h4>
+            <p>Auto-GPT's April 2023 viral moment to ChatGPT Agent's July 2025 launch: the gap between "possible" and "reliable" required fundamental advances in planning, tool use, and error recovery.</p>
+          </div>
+        </li>
+        <li>
+          <span class="takeaway-number">2</span>
+          <div class="takeaway-content">
+            <h4>Standards won over custom integrations</h4>
+            <p>MCP's success showed that agent ecosystems need universal protocols. The "build integration for every tool" approach doesn't scale. Open standards create network effects.</p>
+          </div>
+        </li>
+        <li>
+          <span class="takeaway-number">3</span>
+          <div class="takeaway-content">
+            <h4>Computer Use expanded the possibility space</h4>
+            <p>The ability to interact with any GUI eliminated the "no API" blocker. Agents could finally work with legacy systems, complex web apps, and proprietary software.</p>
+          </div>
+        </li>
+        <li>
+          <span class="takeaway-number">4</span>
+          <div class="takeaway-content">
+            <h4>Coding agents became the first killer use case</h4>
+            <p>Cursor's $29.3B valuation and Claude Code's adoption proved that autonomous coding isn't just useful-it's transformative. Developers were the first to embrace AI that does, not just AI that suggests.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-        <section class="intro">
-            <p>In April 2023, <strong>Auto-GPT went viral</strong>. The idea was simple but revolutionary: what if an AI could break down tasks, execute them autonomously, and iterate on its own work? It captured the imagination of the tech world, even if the reality was often a loop of confused API calls.</p>
-            <p>Fast forward to 2025, and that vision became reality. <strong>AI agents can now browse the web, write and run code, create documents, and complete multi-step workflows</strong>—all without human intervention for each step. The gap between "chat" and "do" finally closed.</p>
-            <p>This path traces the agent revolution: from experimental frameworks to production-ready systems that are reshaping how we work with AI.</p>
-        </section>
+    <!-- Next Path -->
+    <a href="reasoning-revolution.html" class="next-path">
+      <div class="next-path-content">
+        <div class="next-path-label">Continue Learning</div>
+        <div class="next-path-title">The Reasoning Revolution</div>
+      </div>
+      <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+    </a>
+  </article>
 
-        <section class="section-header">
-            <h2>Key Milestones</h2>
-            <p>The breakthroughs that made autonomous AI possible</p>
-        </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">
+      <a href="index.html">All Learning Paths</a> ·
+      <a href="../timeline.html">Visual Timeline</a> ·
+      <a href="../docs.html">Documentation</a>
+    </p>
+  </footer>
 
-        <!-- Milestone 1: Auto-GPT -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>Auto-GPT: The Vision Goes Viral</h3>
-                </div>
-                <span class="milestone-date">Apr 2023</span>
-            </div>
-            <div class="milestone-content">
-                <p>Auto-GPT emerged as one of the first autonomous AI agent frameworks, capturing the tech world's imagination. The concept: give GPT-4 a goal, and it would break it down into tasks, execute them, and iterate until done.</p>
-                <p>Within weeks, it became one of the fastest-growing repos on GitHub. The demo videos were mesmerizing—an AI that could research topics, write code, and navigate the web on its own. Reality was messier (infinite loops, hallucinated plans, astronomical API costs), but the vision was clear.</p>
-                <p><strong>Auto-GPT proved that people wanted AI that does, not just AI that chats.</strong> It sparked a wave of agent frameworks: BabyAGI, AgentGPT, SuperAGI. The race to build autonomous AI was on.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Established "agent" as a category distinct from "chatbot"</li>
-                    <li>Revealed the gap between demo and production reliability</li>
-                    <li>Created demand for better tool use, memory, and planning capabilities</li>
-                    <li>Spawned the LangChain/LlamaIndex agent ecosystem</li>
-                </ul>
-            </div>
-        </article>
+  <!-- Shared JS -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/nav.js"></script>
 
-        <!-- Milestone 2: OpenAI Assistants -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>OpenAI DevDay: Assistants API & GPTs</h3>
-                </div>
-                <span class="milestone-date">Nov 2023</span>
-            </div>
-            <div class="milestone-content">
-                <p>At DevDay 2023, OpenAI launched two products that legitimized agents for the mainstream: the <strong>Assistants API</strong> and <strong>GPTs</strong> (custom ChatGPT versions anyone could create).</p>
-                <p>The Assistants API provided built-in retrieval, code interpreter, and function calling—the three pillars of useful agents. No more stitching together LangChain chains and hoping they worked. OpenAI handled memory, tool execution, and state management.</p>
-                <p>GPTs democratized the concept further: non-developers could create custom AI assistants with specific knowledge and capabilities. While many GPTs were trivial, the best ones showed what purpose-built agents could do.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Made agent development accessible without deep infrastructure knowledge</li>
-                    <li>Code Interpreter showed the power of AI + sandboxed execution</li>
-                    <li>Established patterns: tools, retrieval, memory as core agent capabilities</li>
-                    <li>Proved market demand with millions of GPTs created</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- Milestone 3: Computer Use -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>Claude Computer Use: AI Sees Your Screen</h3>
-                </div>
-                <span class="milestone-date">Oct 2024</span>
-            </div>
-            <div class="milestone-content">
-                <p>In October 2024, Anthropic released <strong>Claude Computer Use</strong>—the ability for Claude to see your screen and control your mouse and keyboard. Instead of relying on APIs and integrations, Claude could interact with any application the way a human would.</p>
-                <p>This was a paradigm shift. Previous agents needed custom integrations for each tool. Computer Use could work with legacy software, web apps with no API, or complex enterprise systems—anything with a visual interface.</p>
-                <p>The demos showed Claude filling out forms, navigating websites, and operating desktop applications. It wasn't perfect (timing issues, visual ambiguity), but it proved a new approach to agent capabilities.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Unlocked automation for any GUI-based workflow</li>
-                    <li>Eliminated the "no API" blocker for many enterprise use cases</li>
-                    <li>Required new thinking about security and sandboxing</li>
-                    <li>Set the stage for "AI worker" rather than "AI assistant"</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- Milestone 4: MCP -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>Model Context Protocol: The Agent Standard</h3>
-                </div>
-                <span class="milestone-date">Apr 2025</span>
-            </div>
-            <div class="milestone-content">
-                <p>Anthropic launched the <strong>Model Context Protocol (MCP)</strong> with Integrations—10 launch partners including Jira, Confluence, and Zapier. MCP created a standardized way for AI to connect to external tools and data sources.</p>
-                <p>Before MCP, every integration was custom. Building an agent that could use Google Calendar, Slack, and GitHub meant three different implementations. MCP provided a universal protocol: tools described their capabilities, and AI models used them consistently.</p>
-                <p>The protocol was open-source from day one, inviting the ecosystem to build. Within months, hundreds of MCP servers emerged for everything from databases to smart home devices.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Reduced integration development from weeks to hours</li>
-                    <li>Created network effects as more tools joined</li>
-                    <li>Enabled agents that span multiple services seamlessly</li>
-                    <li>Established Anthropic as infrastructure leader, not just model provider</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- Milestone 5: ChatGPT Agent -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>ChatGPT Agent: The Vision Realized</h3>
-                </div>
-                <span class="milestone-date">Jul 2025</span>
-            </div>
-            <div class="milestone-content">
-                <p>OpenAI launched <strong>ChatGPT Agent</strong> in July 2025—the culmination of everything the agent space had been building toward. A unified system capable of using its own computer, navigating websites, running code, and creating documents autonomously.</p>
-                <p>Unlike earlier iterations, ChatGPT Agent was production-ready. It could book flights by actually navigating airline websites. Fill out government forms. Research topics across multiple sources and synthesize findings. The "loop of confused API calls" problem from Auto-GPT was solved.</p>
-                <p>The same month, ChatGPT hit 700 million weekly active users. Agents weren't an experiment anymore—they were how millions interacted with AI daily.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Delivered on Auto-GPT's promise at scale</li>
-                    <li>Changed user expectations: AI should complete tasks, not just assist</li>
-                    <li>Created new categories of AI-native workflows</li>
-                    <li>Raised the bar for all competitors</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- Milestone 6: Claude Code -->
-        <article class="milestone">
-            <div class="milestone-header">
-                <div>
-                    <h3>Claude Code: The Autonomous Developer</h3>
-                </div>
-                <span class="milestone-date">Nov 2025</span>
-            </div>
-            <div class="milestone-content">
-                <p>Anthropic launched <strong>Claude Code</strong> in public beta—an autonomous coding agent for large-scale software projects. While GitHub Copilot suggested lines, Claude Code could architect features, refactor codebases, and debug complex issues across multiple files.</p>
-                <p>Claude Code represented a new category: not code completion, but code autonomy. Give it a task like "implement user authentication" and it would plan the approach, create the necessary files, write tests, and iterate until everything worked.</p>
-                <p>The same month, Cursor creator Anysphere raised $2.3B at a $29.3B valuation—the largest AI coding tool funding ever. The market had spoken: autonomous coding was the future.</p>
-            </div>
-            <div class="so-what">
-                <div class="so-what-header">
-                    <svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    So What?
-                </div>
-                <ul>
-                    <li>Elevated "AI pair programmer" to "AI team member"</li>
-                    <li>Changed how developers think about task delegation</li>
-                    <li>Created pressure for better code review and oversight tools</li>
-                    <li>Validated the $100B+ AI coding market</li>
-                </ul>
-            </div>
-        </article>
-
-        <!-- Evolution Table -->
-        <section class="evolution-section">
-            <div class="section-header">
-                <h2>Agent Capability Evolution</h2>
-                <p>How agent capabilities expanded from 2023 to 2025</p>
-            </div>
-            <table class="evolution-table">
-                <thead>
-                    <tr>
-                        <th>Capability</th>
-                        <th>2023</th>
-                        <th>2024</th>
-                        <th>2025</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Multi-step Planning</td>
-                        <td><span class="capability-badge limited">Unreliable</span></td>
-                        <td><span class="capability-badge partial">Improving</span></td>
-                        <td><span class="capability-badge full">Production</span></td>
-                    </tr>
-                    <tr>
-                        <td>Tool Use</td>
-                        <td><span class="capability-badge partial">Function calls</span></td>
-                        <td><span class="capability-badge partial">Structured</span></td>
-                        <td><span class="capability-badge full">MCP/Universal</span></td>
-                    </tr>
-                    <tr>
-                        <td>Code Execution</td>
-                        <td><span class="capability-badge limited">Sandboxed</span></td>
-                        <td><span class="capability-badge partial">Interpreter</span></td>
-                        <td><span class="capability-badge full">Full IDE</span></td>
-                    </tr>
-                    <tr>
-                        <td>Web Browsing</td>
-                        <td><span class="capability-badge limited">Plugin-based</span></td>
-                        <td><span class="capability-badge partial">Built-in</span></td>
-                        <td><span class="capability-badge full">Autonomous</span></td>
-                    </tr>
-                    <tr>
-                        <td>Computer Control</td>
-                        <td><span class="capability-badge limited">None</span></td>
-                        <td><span class="capability-badge partial">Beta</span></td>
-                        <td><span class="capability-badge full">Production</span></td>
-                    </tr>
-                    <tr>
-                        <td>Memory/Context</td>
-                        <td><span class="capability-badge limited">Session only</span></td>
-                        <td><span class="capability-badge partial">Retrieval</span></td>
-                        <td><span class="capability-badge full">Long-term</span></td>
-                    </tr>
-                    <tr>
-                        <td>Reliability</td>
-                        <td><span class="capability-badge limited">Demo only</span></td>
-                        <td><span class="capability-badge partial">Dev use</span></td>
-                        <td><span class="capability-badge full">Enterprise</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- Timeline -->
-        <section class="timeline-section">
-            <div class="section-header">
-                <h2>Full Timeline</h2>
-                <p>Every milestone in the agent revolution</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Apr 13, 2023</div>
-                    <div class="timeline-title">Auto-GPT Goes Viral</div>
-                    <div class="timeline-desc">First popular autonomous AI agent framework captures tech world's imagination</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 6, 2023</div>
-                    <div class="timeline-title">OpenAI Assistants API & GPTs</div>
-                    <div class="timeline-desc">Built-in retrieval, code interpreter, and function calling make agents accessible</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Aug 22, 2024</div>
-                    <div class="timeline-title">LangGraph Cloud</div>
-                    <div class="timeline-desc">LangChain releases infrastructure for deploying stateful multi-agent applications</div>
-                </div>
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Oct 1, 2024</div>
-                    <div class="timeline-title">OpenAI Realtime API</div>
-                    <div class="timeline-desc">Low-latency multimodal voice enables conversational agents</div>
-                </div>
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Oct 22, 2024</div>
-                    <div class="timeline-title">Claude Computer Use</div>
-                    <div class="timeline-desc">AI can see your screen and control mouse/keyboard for any application</div>
-                </div>
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Apr 15, 2025</div>
-                    <div class="timeline-title">MCP & Integrations Launch</div>
-                    <div class="timeline-desc">Model Context Protocol standardizes AI-tool connections with 10 launch partners</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Apr 16, 2025</div>
-                    <div class="timeline-title">OpenAI o3 & o4-mini</div>
-                    <div class="timeline-desc">Next-gen reasoning models with native agentic capabilities</div>
-                </div>
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Jul 17, 2025</div>
-                    <div class="timeline-title">ChatGPT Agent Launch</div>
-                    <div class="timeline-desc">Unified agentic system: browse web, run code, create documents autonomously</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Jul 25, 2025</div>
-                    <div class="timeline-title">ChatGPT 700M Weekly Users</div>
-                    <div class="timeline-desc">Agent capabilities drive user growth to unprecedented scale</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 5, 2025</div>
-                    <div class="timeline-title">GitHub Copilot X</div>
-                    <div class="timeline-desc">Voice coding, project-wide understanding, enhanced debugging</div>
-                </div>
-                <div class="timeline-item breakthrough">
-                    <div class="timeline-date">Nov 15, 2025</div>
-                    <div class="timeline-title">Claude Code Public Beta</div>
-                    <div class="timeline-desc">Autonomous coding agent for large-scale software projects</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">Nov 20, 2025</div>
-                    <div class="timeline-title">Anysphere $2.3B Funding</div>
-                    <div class="timeline-desc">Cursor creator raises at $29.3B—largest AI coding tool round ever</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Key Takeaways -->
-        <section class="takeaways">
-            <h2>Key Takeaways</h2>
-            <ol class="takeaway-list">
-                <li>
-                    <span class="takeaway-number">1</span>
-                    <div class="takeaway-content">
-                        <h4>From demo to production took two years</h4>
-                        <p>Auto-GPT's April 2023 viral moment to ChatGPT Agent's July 2025 launch: the gap between "possible" and "reliable" required fundamental advances in planning, tool use, and error recovery.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="takeaway-number">2</span>
-                    <div class="takeaway-content">
-                        <h4>Standards won over custom integrations</h4>
-                        <p>MCP's success showed that agent ecosystems need universal protocols. The "build integration for every tool" approach doesn't scale. Open standards create network effects.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="takeaway-number">3</span>
-                    <div class="takeaway-content">
-                        <h4>Computer Use expanded the possibility space</h4>
-                        <p>The ability to interact with any GUI eliminated the "no API" blocker. Agents could finally work with legacy systems, complex web apps, and proprietary software.</p>
-                    </div>
-                </li>
-                <li>
-                    <span class="takeaway-number">4</span>
-                    <div class="takeaway-content">
-                        <h4>Coding agents became the first killer use case</h4>
-                        <p>Cursor's $29.3B valuation and Claude Code's adoption proved that autonomous coding isn't just useful—it's transformative. Developers were the first to embrace AI that does, not just AI that suggests.</p>
-                    </div>
-                </li>
-            </ol>
-        </section>
-
-        <!-- Next Path -->
-        <a href="reasoning-revolution.html" class="next-path">
-            <div class="next-path-content">
-                <div class="next-path-label">Continue Learning</div>
-                <div class="next-path-title">The Reasoning Revolution</div>
-            </div>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
-        </a>
-    </main>
-
-    <footer class="footer">
-        <p>AI Chronicle Learning Paths | Updated January 2026</p>
-    </footer>
-
-    <script>
-        // Theme toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
-
-        // Progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progress').style.width = scrolled + '%';
-        });
-    </script>
+  <script>
+    // Progress bar
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
+  </script>
 </body>
 </html>

@@ -5,214 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Models & Research | AI Chronicle Deep Dive</title>
 
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="../assets/css/design-tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/nav.css">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ========================================
-       CSS Custom Properties - Adaptive Theme
-       ======================================== */
     :root {
-      /* Typography */
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'Source Serif 4', Georgia, serif;
       --font-mono: 'Space Mono', monospace;
-
-      /* Spacing */
-      --space-xs: 0.25rem;
-      --space-sm: 0.5rem;
-      --space-md: 1rem;
-      --space-lg: 2rem;
-      --space-xl: 4rem;
-      --space-2xl: 6rem;
-      --space-3xl: 8rem;
-
-      /* Transitions */
-      --transition-fast: 150ms ease;
-      --transition-base: 300ms ease;
-      --transition-slow: 500ms ease;
-    }
-
-    /* Dark Theme (Default) */
-    [data-theme="dark"] {
-      --bg-primary: #0a0a0a;
-      --bg-secondary: #141414;
-      --bg-tertiary: #1a1a1a;
-      --bg-accent: #1f1f1f;
-
-      --text-primary: #fafafa;
-      --text-secondary: #a3a3a3;
-      --text-tertiary: #737373;
-      --text-muted: #525252;
-
-      --accent-primary: #3b82f6;
-      --accent-secondary: #60a5fa;
-      --accent-glow: rgba(59, 130, 246, 0.3);
-
-      --border-subtle: rgba(255, 255, 255, 0.06);
-      --border-default: rgba(255, 255, 255, 0.1);
-      --border-strong: rgba(255, 255, 255, 0.2);
-
-      --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-      --gradient-card: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
-
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
-    }
-
-    /* Light Theme */
-    [data-theme="light"] {
-      --bg-primary: #fafafa;
-      --bg-secondary: #f5f5f5;
-      --bg-tertiary: #ebebeb;
-      --bg-accent: #e0e0e0;
-
-      --text-primary: #0a0a0a;
-      --text-secondary: #525252;
-      --text-tertiary: #737373;
-      --text-muted: #a3a3a3;
-
-      --accent-primary: #2563eb;
-      --accent-secondary: #3b82f6;
-      --accent-glow: rgba(37, 99, 235, 0.15);
-
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border-default: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.15);
-
-      --gradient-hero: linear-gradient(135deg, #fafafa 0%, #e8f0fe 50%, #fafafa 100%);
-      --gradient-card: linear-gradient(180deg, rgba(37, 99, 235, 0.03) 0%, transparent 100%);
-
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.1);
-    }
-
-    /* ========================================
-       Base Styles
-       ======================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
+      --accent-glow: rgba(99, 91, 255, 0.3);
     }
 
     body {
       font-family: var(--font-body);
       font-size: 18px;
       line-height: 1.7;
-      color: var(--text-primary);
-      background: var(--bg-primary);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
     }
 
     ::selection {
-      background: var(--accent-primary);
+      background: var(--color-accent);
       color: white;
     }
 
-    a {
-      color: var(--accent-primary);
-      text-decoration: none;
-      transition: color var(--transition-fast);
-    }
+    a { color: var(--color-accent); }
+    a:hover { color: var(--color-accent-hover); }
 
-    a:hover {
-      color: var(--accent-secondary);
-    }
-
-    /* ========================================
-       Navigation
-       ======================================== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: var(--space-md) var(--space-lg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: transparent;
-      transition: background var(--transition-base), backdrop-filter var(--transition-base);
-    }
-
-    .nav.scrolled {
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    [data-theme="light"] .nav.scrolled {
-      background: rgba(250, 250, 250, 0.8);
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: var(--space-lg);
-      align-items: center;
-    }
-
-    .nav-link {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-secondary);
-      transition: color var(--transition-fast);
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    .theme-toggle {
-      background: transparent;
-      border: 1px solid var(--border-default);
-      color: var(--text-secondary);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition-fast);
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--border-strong);
-      color: var(--text-primary);
-    }
-
-    .theme-toggle svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* ========================================
-       Hero Section
-       ======================================== */
+    /* Hero Section */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -220,8 +45,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: var(--space-3xl) var(--space-lg);
-      background: var(--gradient-hero);
+      padding: 8rem 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -241,21 +65,21 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: var(--accent-primary);
+      color: var(--color-accent);
       background: var(--accent-glow);
-      padding: var(--space-sm) var(--space-md);
+      padding: 0.5rem 1rem;
       border-radius: 100px;
-      margin-bottom: var(--space-lg);
+      margin-bottom: 2rem;
       display: inline-flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: 0.5rem;
     }
 
     .hero-badge::before {
       content: '';
       width: 6px;
       height: 6px;
-      background: var(--accent-primary);
+      background: var(--color-accent);
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
@@ -271,39 +95,35 @@
       font-weight: 400;
       line-height: 1;
       letter-spacing: -0.04em;
-      margin-bottom: var(--space-lg);
+      margin-bottom: 2rem;
       max-width: 12ch;
     }
 
     .hero-title em {
       font-style: italic;
-      color: var(--accent-primary);
+      color: var(--color-accent);
     }
 
     .hero-subtitle {
-      font-family: var(--font-body);
       font-size: clamp(1.1rem, 2vw, 1.5rem);
       font-weight: 300;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       max-width: 50ch;
-      margin-bottom: var(--space-xl);
+      margin-bottom: 3rem;
     }
 
     .hero-stats {
       display: flex;
-      gap: var(--space-xl);
-      margin-top: var(--space-lg);
+      gap: 4rem;
+      margin-top: 2rem;
     }
 
-    .hero-stat {
-      text-align: center;
-    }
+    .hero-stat { text-align: center; }
 
     .hero-stat-value {
       font-family: var(--font-display);
       font-size: 3rem;
       font-weight: 500;
-      color: var(--text-primary);
       line-height: 1;
     }
 
@@ -312,20 +132,20 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: var(--text-tertiary);
-      margin-top: var(--space-sm);
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
     }
 
     .scroll-indicator {
       position: absolute;
-      bottom: var(--space-xl);
+      bottom: 4rem;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-sm);
-      color: var(--text-muted);
+      gap: 0.5rem;
+      color: var(--color-text-muted);
       animation: float 3s ease-in-out infinite;
     }
 
@@ -341,22 +161,20 @@
       letter-spacing: 0.2em;
     }
 
-    /* ========================================
-       Content Sections
-       ======================================== */
+    /* Content Sections */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 var(--space-lg);
+      padding: 0 2rem;
     }
 
     .section {
-      padding: var(--space-3xl) 0;
+      padding: 6rem 0;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: var(--space-2xl);
+      margin-bottom: 4rem;
     }
 
     .section-eyebrow {
@@ -364,8 +182,8 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: var(--accent-primary);
-      margin-bottom: var(--space-md);
+      color: var(--color-accent);
+      margin-bottom: 1rem;
     }
 
     .section-title {
@@ -376,14 +194,12 @@
       line-height: 1.1;
     }
 
-    /* ========================================
-       Pull Quote
-       ======================================== */
+    /* Pull Quote */
     .pull-quote {
-      padding: var(--space-2xl) 0;
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      margin: var(--space-2xl) 0;
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      margin: 4rem 0;
       position: relative;
     }
 
@@ -405,7 +221,6 @@
       font-weight: 400;
       font-style: italic;
       line-height: 1.4;
-      color: var(--text-primary);
       max-width: 20ch;
       margin: 0 auto;
       text-align: center;
@@ -418,29 +233,27 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-tertiary);
+      color: var(--color-text-muted);
       text-align: center;
-      margin-top: var(--space-lg);
+      margin-top: 2rem;
     }
 
-    /* ========================================
-       Timeline Grid
-       ======================================== */
+    /* Timeline Section */
     .timeline-section {
-      background: var(--bg-secondary);
+      background: var(--color-bg-elevated);
     }
 
     .year-block {
-      margin-bottom: var(--space-3xl);
+      margin-bottom: 6rem;
     }
 
     .year-header {
       display: flex;
       align-items: baseline;
-      gap: var(--space-md);
-      margin-bottom: var(--space-xl);
-      padding-bottom: var(--space-md);
-      border-bottom: 1px solid var(--border-subtle);
+      gap: 1rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
     }
 
     .year-number {
@@ -449,80 +262,57 @@
       font-weight: 500;
       line-height: 1;
       letter-spacing: -0.04em;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-tertiary) 100%);
+      background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-muted) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .year-summary {
-      font-family: var(--font-body);
       font-size: 1rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       max-width: 40ch;
     }
 
     .events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: var(--space-lg);
+      gap: 1.5rem;
     }
 
-    /* ========================================
-       Event Card
-       ======================================== */
+    /* Event Card */
     .event-card {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border-subtle);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
       border-radius: 16px;
-      padding: var(--space-lg);
+      padding: 1.5rem;
       position: relative;
       overflow: hidden;
-      transition: all var(--transition-base);
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
-    .event-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gradient-card);
-      opacity: 0;
-      transition: opacity var(--transition-base);
-    }
-
     .event-card:hover {
-      border-color: var(--border-default);
+      border-color: var(--color-accent);
       transform: translateY(-4px);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-    }
-
-    .event-card:hover::before {
-      opacity: 1;
-    }
-
-    .event-card-content {
-      position: relative;
-      z-index: 1;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     }
 
     .event-meta {
       display: flex;
       align-items: center;
-      gap: var(--space-sm);
-      margin-bottom: var(--space-md);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
     }
 
-    .event-significance {
-      font-size: 1.25rem;
-    }
+    .event-significance { font-size: 1.25rem; }
 
     .event-date {
       font-family: var(--font-mono);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-tertiary);
+      color: var(--color-text-muted);
     }
 
     .event-title {
@@ -530,22 +320,21 @@
       font-size: 1.5rem;
       font-weight: 500;
       line-height: 1.2;
-      margin-bottom: var(--space-sm);
+      margin-bottom: 0.5rem;
       letter-spacing: -0.02em;
     }
 
     .event-description {
-      font-family: var(--font-body);
       font-size: 0.95rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       line-height: 1.6;
-      margin-bottom: var(--space-md);
+      margin-bottom: 1rem;
     }
 
     .event-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-xs);
+      gap: 0.25rem;
     }
 
     .event-tag {
@@ -553,7 +342,7 @@
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--accent-primary);
+      color: var(--color-accent);
       background: var(--accent-glow);
       padding: 4px 10px;
       border-radius: 100px;
@@ -562,31 +351,25 @@
     .event-source {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-xs);
+      gap: 0.25rem;
       font-family: var(--font-mono);
       font-size: 0.7rem;
-      color: var(--text-tertiary);
-      margin-top: var(--space-md);
-      padding-top: var(--space-md);
-      border-top: 1px solid var(--border-subtle);
+      color: var(--color-text-muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
     }
 
-    .event-source:hover {
-      color: var(--accent-primary);
-    }
-
-    .event-source svg {
-      width: 14px;
-      height: 14px;
-    }
+    .event-source:hover { color: var(--color-accent); }
+    .event-source svg { width: 14px; height: 14px; }
 
     /* Featured Event */
     .event-card.featured {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-xl);
-      padding: var(--space-xl);
+      gap: 3rem;
+      padding: 2.5rem;
     }
 
     .event-card.featured .event-card-content {
@@ -613,94 +396,67 @@
       opacity: 0.8;
     }
 
-    /* ========================================
-       Expandable Content
-       ======================================== */
-    .event-card.expandable {
-      cursor: pointer;
-    }
-
+    /* Expandable Content */
     .event-expand-toggle {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-xs);
+      gap: 0.25rem;
       font-family: var(--font-mono);
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--accent-primary);
+      color: var(--color-accent);
       background: none;
       border: none;
       cursor: pointer;
-      padding: var(--space-sm) 0;
-      margin-top: var(--space-sm);
-      transition: color var(--transition-fast);
+      padding: 0.5rem 0;
+      margin-top: 0.5rem;
+      transition: color 0.15s ease;
     }
 
-    .event-expand-toggle:hover {
-      color: var(--accent-secondary);
-    }
-
-    .event-expand-toggle svg {
-      width: 14px;
-      height: 14px;
-      transition: transform var(--transition-base);
-    }
-
-    .event-card.expanded .event-expand-toggle svg {
-      transform: rotate(180deg);
-    }
+    .event-expand-toggle:hover { color: var(--color-accent-hover); }
+    .event-expand-toggle svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
+    .event-card.expanded .event-expand-toggle svg { transform: rotate(180deg); }
 
     .event-expanded-content {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transition: max-height var(--transition-slow), opacity var(--transition-base), margin var(--transition-base);
+      transition: max-height 0.5s ease, opacity 0.3s ease, margin 0.3s ease;
       margin-top: 0;
     }
 
     .event-card.expanded .event-expanded-content {
       max-height: 1000px;
       opacity: 1;
-      margin-top: var(--space-md);
+      margin-top: 1rem;
     }
 
     .event-expanded-inner {
-      padding-top: var(--space-md);
-      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+      border-top: 1px solid var(--color-border);
     }
 
-    .event-expanded-section {
-      margin-bottom: var(--space-md);
-    }
-
-    .event-expanded-section:last-child {
-      margin-bottom: 0;
-    }
+    .event-expanded-section { margin-bottom: 1rem; }
+    .event-expanded-section:last-child { margin-bottom: 0; }
 
     .event-expanded-label {
       font-family: var(--font-mono);
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: var(--text-tertiary);
-      margin-bottom: var(--space-xs);
+      color: var(--color-text-muted);
+      margin-bottom: 0.25rem;
     }
 
     .event-expanded-text {
-      font-family: var(--font-body);
       font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       line-height: 1.7;
     }
 
-    .event-expanded-text p {
-      margin-bottom: var(--space-sm);
-    }
-
-    .event-expanded-text p:last-child {
-      margin-bottom: 0;
-    }
+    .event-expanded-text p { margin-bottom: 0.5rem; }
+    .event-expanded-text p:last-child { margin-bottom: 0; }
 
     .event-key-points {
       list-style: none;
@@ -711,91 +467,85 @@
     .event-key-points li {
       position: relative;
       padding-left: 1.5rem;
-      margin-bottom: var(--space-sm);
+      margin-bottom: 0.5rem;
       font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
     }
 
     .event-key-points li::before {
-      content: '→';
+      content: '\2192';
       position: absolute;
       left: 0;
-      color: var(--accent-primary);
+      color: var(--color-accent);
     }
 
-    .event-key-points li:last-child {
-      margin-bottom: 0;
-    }
+    .event-key-points li:last-child { margin-bottom: 0; }
 
     .event-related {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-sm);
+      gap: 0.5rem;
     }
 
     .event-related-link {
       font-family: var(--font-mono);
       font-size: 0.7rem;
-      color: var(--text-tertiary);
-      background: var(--bg-accent);
-      padding: var(--space-xs) var(--space-sm);
+      color: var(--color-text-muted);
+      background: var(--color-bg-elevated);
+      padding: 0.25rem 0.5rem;
       border-radius: 6px;
       text-decoration: none;
-      transition: all var(--transition-fast);
+      transition: all 0.15s ease;
     }
 
     .event-related-link:hover {
-      color: var(--accent-primary);
+      color: var(--color-accent);
       background: var(--accent-glow);
     }
 
-    /* ========================================
-       Insights Section
-       ======================================== */
+    /* Insights Section */
     .insights-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-lg);
+      gap: 1.5rem;
     }
 
     .insight-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-subtle);
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
       border-radius: 16px;
-      padding: var(--space-xl);
+      padding: 2.5rem;
       text-align: center;
-      transition: all var(--transition-base);
+      transition: all 0.3s ease;
     }
 
     .insight-card:hover {
-      border-color: var(--border-default);
+      border-color: var(--color-accent);
       transform: translateY(-4px);
     }
 
     .insight-icon {
       font-size: 3rem;
-      margin-bottom: var(--space-md);
+      margin-bottom: 1rem;
     }
 
     .insight-title {
       font-family: var(--font-display);
       font-size: 1.25rem;
       font-weight: 500;
-      margin-bottom: var(--space-sm);
+      margin-bottom: 0.5rem;
     }
 
     .insight-text {
       font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       line-height: 1.6;
     }
 
-    /* ========================================
-       Footer
-       ======================================== */
+    /* Footer */
     .footer {
-      padding: var(--space-2xl) 0;
-      border-top: 1px solid var(--border-subtle);
+      padding: 4rem 0;
+      border-top: 1px solid var(--color-border);
       text-align: center;
     }
 
@@ -803,19 +553,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-md);
+      gap: 1rem;
     }
 
     .footer-logo {
       font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 500;
-      color: var(--text-primary);
     }
 
     .footer-links {
       display: flex;
-      gap: var(--space-lg);
+      gap: 2rem;
     }
 
     .footer-link {
@@ -823,90 +572,64 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--text-tertiary);
+      color: var(--color-text-muted);
     }
 
-    .footer-link:hover {
-      color: var(--text-primary);
-    }
+    .footer-link:hover { color: var(--color-text); }
 
     .footer-copyright {
       font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: var(--space-md);
+      color: var(--color-text-muted);
+      margin-top: 1rem;
     }
 
-    /* ========================================
-       Responsive
-       ======================================== */
+    /* Responsive */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero-stats {
-        flex-direction: column;
-        gap: var(--space-lg);
-      }
-
-      .event-card.featured {
-        grid-template-columns: 1fr;
-      }
-
-      .event-card.featured .event-visual {
-        order: -1;
-        min-height: 200px;
-      }
-
-      .insights-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: var(--space-md);
-      }
+      .hero-stats { flex-direction: column; gap: 2rem; }
+      .event-card.featured { grid-template-columns: 1fr; }
+      .event-card.featured .event-visual { order: -1; min-height: 200px; }
+      .insights-grid { grid-template-columns: 1fr; }
+      .footer-links { flex-direction: column; gap: 1rem; }
     }
 
-    /* ========================================
-       Animations
-       ======================================== */
+    /* Animations */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .animate-in {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
+    .animate-in { animation: fadeInUp 0.8s ease forwards; }
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
     .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-    .delay-5 { animation-delay: 0.5s; }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <a href="../index.html" class="nav-logo">AI Chronicle</a>
-    <div class="nav-links">
-      <a href="../timeline.html" class="nav-link">Timeline</a>
-      <a href="../docs.html" class="nav-link">Documentation</a>
-      <a href="#" class="nav-link" style="color: var(--accent-primary);">Models</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        </svg>
-      </button>
+  <!-- Global Navigation -->
+  <nav class="global-nav" id="globalNav">
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">AI Chronicle</a>
+      <div class="nav-links">
+        <a href="../timeline.html" class="nav-link">Timeline</a>
+        <a href="../learning-paths/index.html" class="nav-link">Learn</a>
+        <a href="../docs.html#/digests/2025/README" class="nav-link">Digests</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+        <a href="https://github.com/anthropics/awesome-ai-chronicle" class="nav-github" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -969,7 +692,7 @@
           <article class="event-card featured">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">December 9, 2024</span>
               </div>
               <h3 class="event-title">Google Gemini 2.0 Flash Released</h3>
@@ -991,7 +714,7 @@
               </a>
             </div>
             <div class="event-visual">
-              <span class="event-visual-icon">🌐</span>
+              <span class="event-visual-icon">&#127760;</span>
             </div>
           </article>
 
@@ -999,7 +722,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">⭐</span>
+                <span class="event-significance">&#11088;</span>
                 <span class="event-date">November 20, 2024</span>
               </div>
               <h3 class="event-title">Claude 3.5 Haiku Released</h3>
@@ -1017,7 +740,7 @@
           <article class="event-card expandable">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">September 12, 2024</span>
               </div>
               <h3 class="event-title">OpenAI o1 Preview Released</h3>
@@ -1043,8 +766,8 @@
                   <div class="event-expanded-section">
                     <div class="event-expanded-label">The Full Story</div>
                     <div class="event-expanded-text">
-                      <p>OpenAI o1 represents a fundamental shift in how AI models approach problem-solving. Unlike previous models that generate responses token-by-token, o1 uses "chain of thought" reasoning—thinking through problems step-by-step before producing an answer.</p>
-                      <p>The model spends more compute at inference time, taking seconds to minutes to reason through complex problems. This approach excels at math, coding, and scientific reasoning, achieving new benchmarks on competitive mathematics and PhD-level science questions.</p>
+                      <p>OpenAI o1 represents a fundamental shift in how AI models approach problem-solving. Unlike previous models that generate responses token-by-token, o1 uses "chain of thought" reasoning-thinking through problems step-by-step before producing an answer.</p>
+                      <p>The model spends more compute at inference time, taking seconds to minutes to reason through complex problems. This approach excels at math, coding, and scientific reasoning.</p>
                     </div>
                   </div>
 
@@ -1074,7 +797,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">May 13, 2024</span>
               </div>
               <h3 class="event-title">GPT-4o Announced</h3>
@@ -1093,7 +816,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">⭐</span>
+                <span class="event-significance">&#11088;</span>
                 <span class="event-date">April 18, 2024</span>
               </div>
               <h3 class="event-title">Llama 3 Released</h3>
@@ -1112,7 +835,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">March 4, 2024</span>
               </div>
               <h3 class="event-title">Claude 3 Family Released</h3>
@@ -1130,7 +853,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">⭐</span>
+                <span class="event-significance">&#11088;</span>
                 <span class="event-date">February 15, 2024</span>
               </div>
               <h3 class="event-title">Gemini 1.5 Pro: 1M Context</h3>
@@ -1162,7 +885,7 @@
           <article class="event-card featured">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">March 14, 2023</span>
               </div>
               <h3 class="event-title">GPT-4 Released</h3>
@@ -1184,14 +907,14 @@
               </a>
             </div>
             <div class="event-visual">
-              <span class="event-visual-icon">🧠</span>
+              <span class="event-visual-icon">&#129504;</span>
             </div>
           </article>
 
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">December 6, 2023</span>
               </div>
               <h3 class="event-title">Google Gemini Launched</h3>
@@ -1210,7 +933,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">⭐</span>
+                <span class="event-significance">&#11088;</span>
                 <span class="event-date">November 6, 2023</span>
               </div>
               <h3 class="event-title">GPT-4 Turbo Announced</h3>
@@ -1228,7 +951,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">July 18, 2023</span>
               </div>
               <h3 class="event-title">Llama 2 Open-Sourced</h3>
@@ -1247,7 +970,7 @@
           <article class="event-card">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">⭐</span>
+                <span class="event-significance">&#11088;</span>
                 <span class="event-date">July 11, 2023</span>
               </div>
               <h3 class="event-title">Claude 2 Released</h3>
@@ -1278,7 +1001,7 @@
           <article class="event-card featured expandable">
             <div class="event-card-content">
               <div class="event-meta">
-                <span class="event-significance">🔥</span>
+                <span class="event-significance">&#128293;</span>
                 <span class="event-date">November 30, 2022</span>
               </div>
               <h3 class="event-title">ChatGPT Launched</h3>
@@ -1306,7 +1029,7 @@
                     <div class="event-expanded-label">The Full Story</div>
                     <div class="event-expanded-text">
                       <p>ChatGPT's launch on November 30, 2022 marked a pivotal moment in AI history. Built on GPT-3.5, it was fine-tuned using Reinforcement Learning from Human Feedback (RLHF) to be more helpful, harmless, and honest in conversations.</p>
-                      <p>Within 5 days, ChatGPT had over 1 million users. By January 2023, it had 100 million monthly active users, making it the fastest-growing consumer application in history—surpassing TikTok's record by a factor of 10.</p>
+                      <p>Within 5 days, ChatGPT had over 1 million users. By January 2023, it had 100 million monthly active users, making it the fastest-growing consumer application in history.</p>
                     </div>
                   </div>
 
@@ -1339,7 +1062,7 @@
               </a>
             </div>
             <div class="event-visual">
-              <span class="event-visual-icon">💬</span>
+              <span class="event-visual-icon">&#128172;</span>
             </div>
           </article>
         </div>
@@ -1357,7 +1080,7 @@
 
       <div class="insights-grid">
         <div class="insight-card">
-          <div class="insight-icon">🏃</div>
+          <div class="insight-icon">&#127939;</div>
           <h3 class="insight-title">Accelerating Pace</h3>
           <p class="insight-text">
             Major model releases have increased from 1 in 2022 to 7 in 2024,
@@ -1366,7 +1089,7 @@
         </div>
 
         <div class="insight-card">
-          <div class="insight-icon">🔀</div>
+          <div class="insight-icon">&#128256;</div>
           <h3 class="insight-title">Multimodal Convergence</h3>
           <p class="insight-text">
             By 2024, all major labs have shifted to multimodal-first architectures.
@@ -1375,7 +1098,7 @@
         </div>
 
         <div class="insight-card">
-          <div class="insight-icon">🧠</div>
+          <div class="insight-icon">&#129504;</div>
           <h3 class="insight-title">Reasoning Revolution</h3>
           <p class="insight-text">
             o1's chain-of-thought approach marks a paradigm shift from pattern
@@ -1395,7 +1118,7 @@
           <a href="../index.html" class="footer-link">Home</a>
           <a href="../timeline.html" class="footer-link">Timeline</a>
           <a href="../docs.html" class="footer-link">Documentation</a>
-          <a href="https://github.com/manthansh/awesome-ai-chronicle" class="footer-link" target="_blank">GitHub</a>
+          <a href="https://github.com/sahumilan01/awesome-ai-chronicle" class="footer-link" target="_blank">GitHub</a>
         </div>
         <p class="footer-copyright">
           Built with curiosity. Updated with care.
@@ -1404,54 +1127,11 @@
     </div>
   </footer>
 
+  <!-- Shared JS -->
+  <script src="../assets/js/theme-toggle.js"></script>
+  <script src="../assets/js/nav.js"></script>
+
   <script>
-    // Navigation scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-
-    function getPreferredTheme() {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      updateThemeIcon(theme);
-    }
-
-    function updateThemeIcon(theme) {
-      const icon = themeToggle.querySelector('svg');
-      if (theme === 'light') {
-        icon.innerHTML = `
-          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-        `;
-      } else {
-        icon.innerHTML = `
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        `;
-      }
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // Initialize theme
-    setTheme(getPreferredTheme());
-
     // Intersection Observer for animations
     const observerOptions = {
       threshold: 0.1,
@@ -1494,7 +1174,6 @@
     // Prevent card hover effects from interfering with expanded content
     document.querySelectorAll('.event-card.expandable').forEach(card => {
       card.addEventListener('click', (e) => {
-        // Only toggle if clicking directly on the card background (not links or buttons)
         if (e.target === card || e.target.classList.contains('event-card-content')) {
           const toggle = card.querySelector('.event-expand-toggle');
           if (toggle) {

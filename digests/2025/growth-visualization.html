@@ -1,33 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2025 Year in Review — Awesome AI Chronicle</title>
+  <title>2025 Year in Review | Awesome AI Chronicle</title>
   <meta name="description" content="Visualizing the exponential growth of AI developments in 2025.">
+
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="../../assets/css/design-tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --ink: #1a1a1a;
       --paper: #fafaf8;
-      --accent: #c41e3a;
+      --accent: #635bff;
       --muted: #6b6b6b;
       --rule: #e0e0e0;
       --serif: 'Libre Baskerville', Georgia, serif;
       --sans: 'Source Sans 3', -apple-system, sans-serif;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      font-size: 18px;
-      scroll-behavior: smooth;
+    [data-theme="dark"] {
+      --ink: #f5f5f7;
+      --paper: #0a0a0b;
+      --accent: #7c73ff;
+      --muted: #a3a3a3;
+      --rule: #2c2c30;
     }
 
     body {
@@ -35,7 +39,6 @@
       background: var(--paper);
       color: var(--ink);
       line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
     }
 
     /* Masthead */
@@ -79,9 +82,7 @@
       transition: opacity 0.2s;
     }
 
-    .masthead-cta:hover {
-      opacity: 0.7;
-    }
+    .masthead-cta:hover { opacity: 0.7; }
 
     /* Hero */
     .hero {
@@ -202,7 +203,7 @@
     .chart-container {
       border: 1px solid var(--rule);
       padding: 2.5rem;
-      background: white;
+      background: var(--paper);
     }
 
     .chart {
@@ -246,7 +247,7 @@
     .bar {
       width: 100%;
       max-width: 45px;
-      background: var(--ink);
+      background: var(--accent);
       position: relative;
       transform-origin: bottom;
       transform: scaleY(0);
@@ -319,7 +320,7 @@
       width: 100%;
       border-collapse: collapse;
       border: 1px solid var(--rule);
-      background: white;
+      background: var(--paper);
     }
 
     .data-table th,
@@ -338,29 +339,14 @@
       background: var(--paper);
     }
 
-    .data-table td {
-      font-size: 0.9rem;
-    }
+    .data-table td { font-size: 0.9rem; }
 
-    .data-table tbody tr:hover {
-      background: var(--paper);
-    }
+    .data-table tbody tr:hover { background: rgba(99, 91, 255, 0.05); }
 
-    .data-table .month {
-      font-weight: 500;
-    }
-
-    .data-table .entries {
-      font-weight: 600;
-    }
-
-    .data-table .growth {
-      color: #16a34a;
-    }
-
-    .data-table .growth.neutral {
-      color: var(--muted);
-    }
+    .data-table .month { font-weight: 500; }
+    .data-table .entries { font-weight: 600; }
+    .data-table .growth { color: #16a34a; }
+    .data-table .growth.neutral { color: var(--muted); }
 
     /* Timeline Section */
     .timeline-section {
@@ -466,10 +452,11 @@
       align-items: flex-start;
       gap: 1rem;
       transition: all 0.2s;
+      background: var(--paper);
     }
 
     .theme-card:hover {
-      border-color: var(--ink);
+      border-color: var(--accent);
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(0,0,0,0.06);
     }
@@ -477,6 +464,7 @@
     .theme-icon {
       font-size: 1.25rem;
       flex-shrink: 0;
+      color: var(--accent);
     }
 
     .theme-name {
@@ -500,6 +488,11 @@
       text-align: center;
     }
 
+    [data-theme="dark"] .cta {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
     .cta-title {
       font-family: var(--serif);
       font-size: 2rem;
@@ -514,6 +507,8 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    [data-theme="dark"] .cta-text { color: rgba(255,255,255,0.85); }
 
     .cta-buttons {
       display: flex;
@@ -538,10 +533,18 @@
       border-color: var(--paper);
     }
 
+    [data-theme="dark"] .btn-primary {
+      background: #ffffff;
+      color: var(--accent);
+      border-color: #ffffff;
+    }
+
     .btn-primary:hover {
       background: transparent;
       color: var(--paper);
     }
+
+    [data-theme="dark"] .btn-primary:hover { color: #ffffff; }
 
     .btn-secondary {
       background: transparent;
@@ -549,9 +552,13 @@
       border-color: rgba(255,255,255,0.3);
     }
 
-    .btn-secondary:hover {
-      border-color: var(--paper);
+    [data-theme="dark"] .btn-secondary {
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.5);
     }
+
+    .btn-secondary:hover { border-color: var(--paper); }
+    [data-theme="dark"] .btn-secondary:hover { border-color: #ffffff; }
 
     /* Footer */
     .footer {
@@ -570,24 +577,13 @@
       text-decoration: none;
     }
 
-    .footer-text a:hover {
-      text-decoration: underline;
-    }
+    .footer-text a:hover { text-decoration: underline; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .chart {
-        height: 200px;
-      }
-
-      .bar-label {
-        font-size: 0.6rem;
-      }
-
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .chart { height: 200px; }
+      .bar-label { font-size: 0.6rem; }
       .masthead-inner {
         flex-direction: column;
         gap: 0.5rem;
@@ -705,15 +701,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td class="month">January</td><td class="entries">8</td><td class="growth neutral">—</td><td>8</td></tr>
+        <tr><td class="month">January</td><td class="entries">8</td><td class="growth neutral">-</td><td>8</td></tr>
         <tr><td class="month">February</td><td class="entries">9</td><td class="growth">+12.5%</td><td>17</td></tr>
         <tr><td class="month">March</td><td class="entries">10</td><td class="growth">+11.1%</td><td>27</td></tr>
         <tr><td class="month">April</td><td class="entries">11</td><td class="growth">+10.0%</td><td>38</td></tr>
         <tr><td class="month">May</td><td class="entries">12</td><td class="growth">+9.1%</td><td>50</td></tr>
-        <tr><td class="month">June</td><td class="entries">12</td><td class="growth neutral">—</td><td>62</td></tr>
+        <tr><td class="month">June</td><td class="entries">12</td><td class="growth neutral">-</td><td>62</td></tr>
         <tr><td class="month">July</td><td class="entries">13</td><td class="growth">+8.3%</td><td>75</td></tr>
         <tr><td class="month">August</td><td class="entries">14</td><td class="growth">+7.7%</td><td>89</td></tr>
-        <tr><td class="month">September</td><td class="entries">14</td><td class="growth neutral">—</td><td>103</td></tr>
+        <tr><td class="month">September</td><td class="entries">14</td><td class="growth neutral">-</td><td>103</td></tr>
         <tr><td class="month">October</td><td class="entries">15</td><td class="growth">+7.1%</td><td>118</td></tr>
         <tr><td class="month">November</td><td class="entries">17</td><td class="growth">+13.3%</td><td>135</td></tr>
         <tr><td class="month">December</td><td class="entries">18</td><td class="growth">+5.9%</td><td>153</td></tr>
@@ -774,7 +770,7 @@
         <span class="theme-icon">&#9670;</span>
         <div>
           <h3 class="theme-name">Reasoning Models</h3>
-          <p class="theme-desc">From o1 to o3, R1 to Deep Think—the year thinking became a feature.</p>
+          <p class="theme-desc">From o1 to o3, R1 to Deep Think-the year thinking became a feature.</p>
         </div>
       </div>
       <div class="theme-card">
@@ -788,7 +784,7 @@
         <span class="theme-icon">&#9672;</span>
         <div>
           <h3 class="theme-name">The Agent Era</h3>
-          <p class="theme-desc">ChatGPT Agent, Claude's 7-hour sessions, Jules—AI that works for you.</p>
+          <p class="theme-desc">ChatGPT Agent, Claude's 7-hour sessions, Jules-AI that works for you.</p>
         </div>
       </div>
       <div class="theme-card">
@@ -809,14 +805,14 @@
         <span class="theme-icon">&#9671;</span>
         <div>
           <h3 class="theme-name">Scientific AI</h3>
-          <p class="theme-desc">AlphaEvolve, Co-Scientist, drug discovery—AI as research partner.</p>
+          <p class="theme-desc">AlphaEvolve, Co-Scientist, drug discovery-AI as research partner.</p>
         </div>
       </div>
       <div class="theme-card">
         <span class="theme-icon">&#9672;</span>
         <div>
           <h3 class="theme-name">Multimodal Default</h3>
-          <p class="theme-desc">Video (Sora 2, Veo 3), audio, 3D—became standard, not optional.</p>
+          <p class="theme-desc">Video (Sora 2, Veo 3), audio, 3D-became standard, not optional.</p>
         </div>
       </div>
     </div>
@@ -836,5 +832,8 @@
       Built by the community, for the community. <a href="../../docs.html#/LICENSE">MIT License</a> · <a href="../../docs.html#/CONTRIBUTING">Contribute</a>
     </p>
   </footer>
+
+  <!-- Shared JS -->
+  <script src="../../assets/js/theme-toggle.js"></script>
 </body>
 </html>
