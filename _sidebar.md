@@ -6,6 +6,7 @@
   * [The Reasoning Revolution](learning-paths/reasoning-revolution.html ':target=_blank')
   * [Open Source AI](learning-paths/open-source-ai.html ':target=_blank')
   * [Rise of AI Agents](learning-paths/ai-agents.html ':target=_blank')
+  * [Enterprise AI Adoption](learning-paths/enterprise-ai.html ':target=_blank')
 
 * **Deep Dives**
   * [Models & Research](deep-dives/models-research.html ':target=_blank')
